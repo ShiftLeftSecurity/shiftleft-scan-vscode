@@ -337,7 +337,7 @@ export class ExplorerController implements Disposable {
             <script src="${colResizeDiskPath}"></script>
             <script data-main="${explorerPath}" src="${requireJsPath}"></script>
         </head>
-        <body>
+        <body class="shiftleft-scan">
             <div class="container grid-xl">
             <header class="navbar" style="height: 4rem;">
               <section class="navbar-section">
