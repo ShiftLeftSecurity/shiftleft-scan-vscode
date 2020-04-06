@@ -15,19 +15,19 @@ jobs:
           npm install -g vsce
           npm install
       - name: Self sast-scan
-          uses: ShiftLeftSecurity/scan-action@master
-          with:
-            output: reports
-            type: nodejs,credscan,depscan
-          env:
-            DISABLE_TELEMETRY: true
-            WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ShiftLeftSecurity/scan-action@master
+        with:
+          output: reports
+          type: nodejs,credscan,depscan
+        env:
+          DISABLE_TELEMETRY: true
+          WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create package
         run: |
           sh release.sh
       - name: Upload package
-          uses: actions/upload-artifact@v1.0.0
-          with:
-            name: scan-vscode-dev
-            path: dist
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: scan-vscode-dev
+          path: dist
