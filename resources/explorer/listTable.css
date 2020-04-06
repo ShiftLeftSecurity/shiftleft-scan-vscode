@@ -5,42 +5,42 @@
 // ********************************************************/
 
 .listtable {
-    border-spacing: 0px !important;
-    cursor: pointer;
-    user-select: none;
-    width: 100%;
-    margin-right: -10px;
+  border-spacing: 0px !important;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  margin-right: -10px;
 }
 
 .listtable > thead > tr > th:first-child {
-    width: 10px !important;
+  width: 20px !important;
 }
 
 .listtable > thead > tr > th:nth-child(2) {
-    width: 40% !important;
+  width: 40% !important;
 }
 .listtable > thead > tr > th:nth-child(3) {
-    width: 90px !important;
+  width: 90px !important;
 }
 .listtable > thead > tr > th:nth-child(5) {
-    width: 100px !important;
+  width: 100px !important;
 }
 
 .listtablerow.hidden {
-    display: none;
+  display: none;
 }
 
 .listtable td {
-    font-size: 12px;
+  font-size: 12px;
 }
 tr.listtablerow:hover {
-    background-color: #3ecf8e;
+  background-color: #3ecf8e;
 }
 
 tr.listtablerow.selected {
-    background-color: #5725e1;
+  background-color: #5725e1;
 }
 
 tr.listtablerow.selected:focus {
-    background-color: #3ecf8e;
+  background-color: #3ecf8e;
 }
