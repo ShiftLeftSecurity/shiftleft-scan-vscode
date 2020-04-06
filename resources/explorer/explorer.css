@@ -359,6 +359,10 @@ li.codeflowselected:focus {
   margin-right: 5px;
 }
 
+#resultslisttablecontainer {
+  background: #303284;
+}
+
 a {
   color: #ffffff;
 }
