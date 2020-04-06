@@ -1,0 +1,318 @@
+﻿/***********************************************************
+// *                                                       *
+// *   Copyright (C) ShiftLeft Inc. All rights reserved.       *
+// *                                                       *
+// ********************************************************/
+
+:focus {
+    outline: unset;
+}
+
+body {
+    box-shadow: #000000 0 8px 6px -6px inset;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0px;
+    background: linear-gradient(to right,#5140e6 0,#11f2ff 100%);
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+        sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+.headercontainer {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #1c253e;
+    width: 100%;
+}
+
+.headercontainer > label:first-child::before {
+    font-size: 10px;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+/* expand arrow */
+.headercontainer.collapsed > label:first-child::before,
+li.collapsed::before,
+.listtablegroup.collapsed > th::before {
+    content: "\25b7";
+    font-weight: normal;
+}
+
+th {
+    background-color: #272879;
+    font-size: 14px;
+    padding: 8px;
+}
+
+/* collapse arrow */
+.headercontainer.expanded > label:first-child::before,
+li.expanded::before,
+.listtablegroup.expanded > th::before {
+    content: "\25e2";
+    font-weight: normal;
+    padding-right: 3px;
+}
+
+.headercontentseperator {
+    color: #5725e1;
+    font-size: 150%;
+    padding: 0px 9px;
+}
+
+#titleruleid,
+#titlerulename {
+    font-weight: 700;
+    padding-right: 20px;
+}
+
+#titleruleid {
+    color: #3ecf8e;
+}
+
+#resultdetailscontainer {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 1 50vh;
+    background-color: #1c253e;
+    font-size: 12px;
+}
+
+div#resultdetailscontainer:empty {
+    display: none;
+}
+
+#resultdescription {
+    flex: 0 0 auto;
+    max-height: 40%;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    padding: 2px 10px;
+}
+
+#tabcontainer {
+    display: flex;
+    flex: 0 0 auto;
+    overflow-x: scroll;
+}
+
+.tab {
+    color: #ffffff;
+    padding: 5px 7px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.tab:hover {
+    color: #3ecf8e;
+}
+
+.tabactive > .tablabel {
+    border-bottom-color: #3ecf8e;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    color: #ffffff;
+    padding-bottom: 2px;
+}
+
+.tabcontent {
+    display: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0px 10px;
+}
+
+.tabcontentactive {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#stackstabcontent.tabcontentactive {
+    display: unset;
+}
+
+#stackstabcontent {
+    padding: 0px 0px 0px 10px;
+}
+
+.tabcontentheader {
+    background-color: var(--vscode-sideBarSectionHeader-background);
+    border-bottom-color: #5725e1;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    display: flex;
+    flex: 0 0 auto;
+    padding-bottom: 5px;
+}
+
+.tabcontentheaderbutton {
+    cursor: pointer;
+    font-size: 150%;
+    padding-left: 10px;
+    user-select: none;
+}
+
+#tabcontentcontainer {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column nowrap;
+}
+
+.td-contentname {
+    vertical-align: top;
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+.td-contentvalue {
+    white-space: normal;
+}
+
+input[type="range"] {
+    width: 4.75em;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    clip-path: polygon(50% 90%, 100% 60%, 100% 10%, 0 10%, 0 60%);
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 0.3em,
+        var(--vscode-editor-foreground) 0.3em,
+        transparent 0.45em,
+        transparent 2em
+    );
+    background-origin: content-box;
+    background-position-y: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 30%, 100% 100%, 100% 100%;
+}
+
+ul {
+    background: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    list-style-type: none;
+    outline: none;
+    padding-left: 15px;
+}
+
+ul.codeflowtreeroot,
+ul.attachmentstreeroot,
+ul.fixestreeroot {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+li.collapsed > ul {
+    display: none;
+}
+
+li.expanded > ul {
+    display: block;
+}
+
+li.unexpandable {
+    padding-left: 17px;
+}
+
+li.esential {
+    font-weight: bold;
+}
+
+li.unimportant {
+    font-style: italic;
+    font-weight: lighter;
+}
+
+li.verbosityshow {
+    display: block;
+    word-break: break-all;
+}
+
+li.verbosityhide {
+    display: none;
+}
+
+li:hover {
+    background: #3ecf8e;
+}
+
+li.codeflowselected {
+    background: #5725e1;
+    color: #ffffff;
+}
+
+li.codeflowselected:focus {
+    background: #5725e1;
+    color: #ffffff;
+}
+
+.treenodeline,
+.treenodelocation {
+    float: right;
+    font-style: italic;
+}
+
+.treenodelocation {
+    max-width: 30%;
+    overflow: hidden;
+    padding-left: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#codeflowtreecontainer {
+    overflow-y: scroll;
+}
+
+#emptyResults,
+.empty,
+.card {
+    background: #303284;
+    color: #ffffff;
+}
+
+#scanBtn {
+    background-color:#3ecf8e;
+    color:#ffffff;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    text-decoration:none;
+    text-align:center;
+}
+
+#scanBtn:focus,
+#scanBtn:hover {
+    background:#5725e1;
+    color:#ffffff;
+}
+
+.chip {
+    color: #000000;
+}
+
+#resultslisttablecontainer {
+    background: #303284;
+}
+
+a {
+    color: #ffffff;
+}
+
+a:hover {
+    color: #3ecf8e;
+}
