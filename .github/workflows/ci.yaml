@@ -14,15 +14,6 @@ jobs:
         run: |
           npm install -g vsce
           npm install
-      - name: Self sast-scan
-        uses: ShiftLeftSecurity/scan-action@master
-        with:
-          output: reports
-          type: nodejs,credscan,depscan
-        env:
-          DISABLE_TELEMETRY: true
-          WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create package
         run: |
           sh release.sh

@@ -857,11 +857,15 @@ export class ResultsList {
     const results: HTMLDivElement = <HTMLDivElement>(
       document.getElementById("results")
     );
+    const scanRunning: HTMLDivElement = <HTMLDivElement>(
+      document.getElementById("scanRunning")
+    );
     let resultCount: number = 0;
     if (this.data) {
       resultCount = this.data.resultCount;
     }
     // Show/hide empty results based on count
+    scanRunning.hidden = true;
     if (!resultCount) {
       emptyResults.hidden = false;
       results.hidden = true;
