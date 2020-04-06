@@ -1,0 +1,17 @@
+.vscode/**
+.vscode-test/**
+out/test/**
+out/**/*.map
+src/**
+.gitignore
+tsconfig.json
+tsconfig.explorer.json
+tslint.json
+sariftypesgenerator/**
+samples/**
+workspace.code-workspace
+*.vsix
+.idea/*
+.github/*
+dist/*
+reports/
