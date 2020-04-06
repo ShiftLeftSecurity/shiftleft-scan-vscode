@@ -7,6 +7,16 @@
 :focus {
   outline: unset;
 }
+:root {
+  --layer0: #1c1c25;
+  --layer1: #23212e;
+  --layer2: #312e3b;
+  --layer3: #4b4953;
+  --layer4: #5c5b64;
+  --layer5: #6c6b73;
+  --btn-background: #8d57d9;
+  --btn-focus-background: #c194ff;
+}
 
 body {
   box-shadow: #000000 0 8px 6px -6px inset;
@@ -16,7 +26,7 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0px;
-  background: #111;
+  background-color: var(--layer0);
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
@@ -34,7 +44,7 @@ header.navbar .navbar-section {
 .headercontainer {
   padding: 10px;
   font-size: 16px;
-  background-color: rgb(49, 46, 59);
+  background-color: var(--layer1);
   width: 100%;
 }
 
@@ -296,18 +306,19 @@ li.codeflowselected:focus {
 }
 
 #scanBtn {
-  background-color: #8d57d9;
+  background-color: var(--btn-background);
   color: #ffffff;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   text-decoration: none;
   text-align: center;
+  outline: none;
 }
 
 #scanBtn:focus,
 #scanBtn:hover {
-  background: #c194ff;
+  background: var(--btn-focus-background);
   color: #ffffff;
 }
 
@@ -315,8 +326,36 @@ li.codeflowselected:focus {
   color: #000000;
 }
 
+#results {
+  padding: 5px;
+}
+
 #resultslisttablecontainer {
-  background: #303284;
+  background: var(--layer2);
+  padding: 5px;
+}
+
+#resultslisttable {
+  background: var(--layer2);
+}
+
+#resultslisttable thead th {
+  background: var(--layer3);
+  padding: 5px;
+}
+
+#resultslisttable tbody th {
+  background: var(--layer3);
+  padding: 5px;
+  padding-left: 5px !important;
+}
+
+#resultslisttable tbody td {
+  background: var(--layer4);
+}
+
+#resultslisttable .listtablegroup.collapsed > th::before {
+  margin-right: 5px;
 }
 
 a {
