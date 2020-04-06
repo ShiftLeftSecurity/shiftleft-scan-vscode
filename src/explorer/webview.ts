@@ -1633,6 +1633,28 @@ export class ExplorerWebview {
    */
   public onScanBtnClicked(event: MouseEvent): void {
     this.sendMessage({ data: "", type: MessageType.PerformScan });
+    const emptyResults: HTMLDivElement = <HTMLDivElement>(
+      document.getElementById("emptyResults")
+    );
+    const results: HTMLDivElement = <HTMLDivElement>(
+      document.getElementById("results")
+    );
+    const scanRunning: HTMLDivElement = <HTMLDivElement>(
+      document.getElementById("scanRunning")
+    );
+    const hiddenClass: string = "hidden";
+    if (emptyResults) {
+      emptyResults.hidden = true;
+    }
+    if (results) {
+      emptyResults.hidden = true;
+    }
+    if (scanRunning) {
+      scanRunning.hidden = false;
+      if (scanRunning.classList.contains(hiddenClass) === true) {
+        scanRunning.classList.remove(hiddenClass);
+      }
+    }
   }
 
   /**

@@ -279,6 +279,7 @@ li.codeflowselected:focus {
 }
 
 #emptyResults,
+#scanRunning,
 .empty,
 .card {
     background: #303284;

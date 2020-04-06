@@ -136,7 +136,7 @@ export class ExplorerController implements Disposable {
       }
     } else {
       this.wvPanel = window.createWebviewPanel(
-        "sarifExplorer",
+        "shiftleftScan",
         ExplorerController.ExplorerTitle,
         { preserveFocus: true, viewColumn: ViewColumn.Two },
         {
@@ -352,6 +352,14 @@ export class ExplorerController implements Disposable {
                   <div class="empty-action">
                     <button class="btn btn-primary" id="scanBtn">Perform Security Scan</button>
                   </div>
+                </div>
+              </div></div>
+            </div>
+            <div id="scanRunning">
+              <div class="columns col-gapless"><div class="column col-12">
+                <div class="empty">
+                  <p class="empty-title h3">Security scan has started</p>
+                  <p class="empty-subtitle">Scan findings would appear here shortly ...</p>
                 </div>
               </div></div>
             </div>
