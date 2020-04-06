@@ -4,7 +4,7 @@
     "description": "ShiftLeft Scan is a free commercial-grade security tool for modern DevOps teams",
     "author": "ShiftLeft Inc",
     "license": "UNLICENSED",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "publisher": "ShiftLeftSecurity",
     "homepage": "https://shiftleft.io",
     "repository": {
@@ -35,6 +35,7 @@
     "activationEvents": [
         "onLanguage:json",
         "onCommand:extension.shiftleft.LaunchExplorer",
+        "onCommand:extension.shiftleft.PerformScan",
         "workspaceContains:**/*.sarif"
     ],
     "main": "./out/extension",
@@ -67,6 +68,11 @@
                     "type": "string",
                     "default": "shiftleft/sast-scan",
                     "description": "Scan container image to use"
+                },
+                "shiftleft-scan.appRoot": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Application root. Set this when using a monorepo with multiple applications"
                 },
                 "shiftleft-scan.disableTelemetry": {
                     "type": "boolean",

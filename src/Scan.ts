@@ -24,6 +24,7 @@ export class Scan {
   private static readonly configContainerImage = "containerImage";
   private static readonly configScanMode = "scanMode";
   private static readonly configDisableTelemetry = "disableTelemetry";
+  private static readonly configAppRoot = "appRoot";
 
   public static initialize(extensionContext: vscode.ExtensionContext): void {
     Scan.registerCommands(extensionContext);
@@ -47,6 +48,20 @@ export class Scan {
     return Scan.scanInProgress;
   }
 
+  public static async showResults(): Promise<void> {
+    const sarifFiles: Uri[] = await workspace.findFiles(
+      "reports/*.sarif",
+      "**/node_modules/**",
+      5
+    );
+    if (sarifFiles && sarifFiles.length) {
+      for (const f in sarifFiles) {
+        await workspace.openTextDocument(sarifFiles[f]);
+      }
+      await commands.executeCommand("extension.shiftleft.LaunchExplorer");
+    }
+  }
+
   /**
    * Perform ShiftLeft Scan
    */
@@ -62,8 +77,9 @@ export class Scan {
       "shiftleft/sast-scan"
     );
     const scanMode: string = sarifConfig.get(Scan.configScanMode, "ide");
+    const appRootFromConfig: string | undefined = sarifConfig.get(Scan.configAppRoot, undefined);
     const disableTelemetry: boolean = sarifConfig.get(Scan.configDisableTelemetry, false);
-    const appRoot: string = workspace?.workspaceFolders![0].uri.path;
+    const appRoot: string = appRootFromConfig && appRootFromConfig !== "" ? appRootFromConfig : workspace?.workspaceFolders![0].uri.path;
     const cmdArgs: string[] = [
       "run",
       "--rm",
@@ -87,37 +103,31 @@ export class Scan {
     const proc: ChildProcess = spawn("docker", cmdArgs, { shell: true });
     Scan.scanInProgress = true;
     proc.stdout.on("data", async (data: string) => {
-      setTimeout(() => {
+      setTimeout(async () => {
         outputChannel.appendLine(data);
+        if (data.includes("========")) {
+          await Scan.showResults();
+        }
       }, 500);
     });
     proc.stderr.on("data", async (data: string) => {
-      setTimeout(() => {
+      setTimeout(async () => {
         outputChannel.appendLine(data);
+        if (data.includes("========")) {
+          await Scan.showResults();
+        }
       }, 500);
     });
     proc.on("close", async (code) => {
       Scan.scanInProgress = false;
       if (code !== 0) {
         await window.showErrorMessage(
-          `ShiftLeft scan has failed. Please check if docker is running. ${cmdArgs.join(
-            " "
-          )}`,
+          `ShiftLeft scan has failed. Please check if docker desktop is running`,
           { modal: false }
         );
       } else {
         outputChannel.appendLine("ShiftLeft Scan completed successfully 👍");
-        await commands.executeCommand("extension.shiftleft.LaunchExplorer");
-        const sarifFiles: Uri[] = await workspace.findFiles(
-          "reports/*.sarif",
-          "**/node_modules/**",
-          3
-        );
-        if (sarifFiles && sarifFiles.length) {
-          for (const f in sarifFiles) {
-            await workspace.openTextDocument(sarifFiles[f]);
-          }
-        }
+        await Scan.showResults();
       }
     });
   }
