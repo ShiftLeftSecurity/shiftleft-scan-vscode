@@ -11,9 +11,9 @@ jobs:
         with:
           node-version: 12.x
       - name: Install dependencies
-          run: |
-            npm install -g vsce
-            npm install
+        run: |
+          npm install -g vsce
+          npm install
       - name: Self sast-scan
           uses: ShiftLeftSecurity/scan-action@master
           with:
@@ -24,8 +24,8 @@ jobs:
             WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create package
-          run: |
-            sh release.sh
+        run: |
+          sh release.sh
       - name: Upload package
           uses: actions/upload-artifact@v1.0.0
           with:
