@@ -352,6 +352,7 @@ li.codeflowselected:focus {
 
 #resultslisttable tbody td {
   background: var(--layer4);
+  padding: 2px !important;
 }
 
 #resultslisttable .listtablegroup.collapsed > th::before {
