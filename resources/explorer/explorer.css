@@ -360,7 +360,31 @@ li.codeflowselected:focus {
 }
 
 #resultslisttablecontainer {
-  background: #303284;
+  background: var(--layer2);
+  padding: 5px;
+}
+
+#resultslisttable {
+  background: var(--layer2);
+}
+
+#resultslisttable thead th {
+  background: var(--layer3);
+  padding: 5px;
+}
+
+#resultslisttable tbody th {
+  background: var(--layer3);
+  padding: 5px;
+  padding-left: 5px !important;
+}
+
+#resultslisttable tbody td {
+  background: var(--layer4);
+}
+
+#resultslisttable .listtablegroup.collapsed > th::before {
+  margin-right: 5px;
 }
 
 a {
