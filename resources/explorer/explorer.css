@@ -68,6 +68,11 @@ li.collapsed::before,
   font-weight: normal;
 }
 
+#result-details > .headercontainer.collapsed > label:first-child::before,
+#result-details > .headercontainer.expanded > label:first-child::before {
+  content: "";
+}
+
 th {
   background-color: #272879;
   font-size: 14px;
@@ -99,12 +104,18 @@ li.expanded::before,
   color: #3ecf8e;
 }
 
+#result-details {
+  width: 100%;
+  padding: 0 10px;
+}
+
 #resultdetailscontainer {
   display: flex;
   flex-flow: column nowrap;
   flex: 1 1 50vh;
   background-color: #1c253e;
   font-size: 12px;
+  padding-bottom: 20px;
 }
 
 div#resultdetailscontainer:empty {
@@ -358,6 +369,10 @@ li.codeflowselected:focus {
 
 #resultslisttable tbody tr:hover td,
 #resultslisttable tbody tr.selected td {
+  background-color: #1c253e;
+}
+
+#resultslisttable tbody tr#temp-row td {
   background-color: #1c253e;
 }
 

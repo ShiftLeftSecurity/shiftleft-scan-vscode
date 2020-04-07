@@ -666,6 +666,7 @@ export class ResultsList {
       curSelected[0].classList.remove("selected");
     }
     row.classList.add("selected");
+    this.moveResultsNextToRow(row);
 
     const resultId: string | undefined = row.dataset.id;
     if (resultId === undefined) {
@@ -676,6 +677,38 @@ export class ResultsList {
       data: resultId,
       type: MessageType.ResultsListResultSelected,
     });
+  }
+
+  private moveResultsNextToRow(row: HTMLTableRowElement) {
+    setTimeout(() => {
+      const resultDetails: Element | null = document.querySelector(
+        "#result-details"
+      );
+
+      if (resultDetails) {
+        let tempRow: HTMLTableRowElement | null = document.querySelector(
+          "#temp-row"
+        );
+        if (!tempRow) {
+          tempRow = document.createElement("tr");
+          tempRow.setAttribute("id", "temp-row");
+          const tempCell = document.createElement("td");
+          tempCell.setAttribute("colspan", "5");
+          tempRow.appendChild(tempCell);
+        } else {
+          tempRow.remove();
+        }
+        if (tempRow) {
+          const tempCell: HTMLTableCellElement | null = tempRow.querySelector(
+            "td"
+          );
+          if (tempCell != null) {
+            tempCell.appendChild(resultDetails);
+            row.insertAdjacentElement("afterend", tempRow);
+          }
+        }
+      }
+    }, 500);
   }
 
   /**

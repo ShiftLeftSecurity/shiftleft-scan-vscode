@@ -393,8 +393,10 @@ export class ExplorerController implements Disposable {
                         <table id="resultslisttable" class="listtable"></table>
                     </div>
                 </div>
-                <div id="resultdetailsheader" class="headercontainer expanded"></div>
-                <div id="resultdetailscontainer"></div>
+                <div id="result-details">
+                  <div id="resultdetailsheader" class="headercontainer expanded"></div>
+                  <div id="resultdetailscontainer"></div>
+                </div>
               </div></div>
             </div>
           </div>
