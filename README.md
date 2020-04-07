@@ -46,10 +46,6 @@ While working with large monorepo based repositories, configure the application 
 
 **NOTE:** This configuration can be specified for either the user or for the workspace. To set it for a particular workspace, choose the `Workspace` tab in the above settings screen.
 
-## Screenshots
-
-![Extension in Action](resources/readmeImages/vscode.gif?raw=true)
-
 # Support
 
 For help and support installing and using this extension, please use: https://discuss.shiftleft.io
@@ -63,6 +59,7 @@ For help and support installing and using this extension, please use: https://di
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
+
 - Internet connectivity is required while loading the results for the first time. You might see the below error otherwise.
 
 ```
