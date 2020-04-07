@@ -26,7 +26,7 @@ export interface SVDiagnosticsChangedEvent {
 }
 
 /**
- * Manager for the Diagnostic Collection contianing the sarif result diagnostics
+ * Manager for the Diagnostic Collection containing the sarif result diagnostics
  * Allows us to control which diagnostics we send to the Problems panel, so we can show a custom message on max entries
  * And lets us easily try to map those that weren't mapped previously
  */
@@ -377,6 +377,5 @@ export class SVDiagnosticCollection implements Disposable {
    * Can't selectively remove issues because the issues don't have a link back to the sarif file it came from
    * @param doc document that was closed
    */
-  public onDocumentClosed(doc: TextDocument): void {
-  }
+  public onDocumentClosed(doc: TextDocument): void {}
 }

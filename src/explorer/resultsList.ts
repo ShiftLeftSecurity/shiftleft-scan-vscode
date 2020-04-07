@@ -708,7 +708,7 @@ export class ResultsList {
           }
         }
       }
-    }, 500);
+    }, 50);
   }
 
   /**

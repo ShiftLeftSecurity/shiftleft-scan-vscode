@@ -54,7 +54,10 @@ export class Scan {
    * @string workspaceRoot Workspace root directory
    * @string appRoot Application root directory
    */
-  public static async showResults(workspaceRoot: string, appRoot: string): Promise<void> {
+  public static async showResults(
+    workspaceRoot: string,
+    appRoot: string
+  ): Promise<void> {
     let relativeRoot: string = "";
     if (workspaceRoot !== appRoot) {
       relativeRoot = appRoot.replace(workspaceRoot + "/", "");

@@ -6,14 +6,14 @@ import * as path from "path";
 import * as sarif from "sarif";
 import {
   commands,
+  Disposable,
+  Event,
+  EventEmitter,
+  ExtensionContext,
   Uri,
   ViewColumn,
   WebviewPanel,
   window,
-  ExtensionContext,
-  EventEmitter,
-  Event,
-  Disposable,
 } from "vscode";
 import { MessageType } from "./common/Enums";
 import {
@@ -134,6 +134,7 @@ export class ExplorerController implements Disposable {
     if (this.wvPanel) {
       if (!this.wvPanel.visible) {
         this.wvPanel.reveal(undefined, false);
+        this.diagnosticCollection.clear();
       }
     } else {
       this.wvPanel = window.createWebviewPanel(
@@ -216,6 +217,9 @@ export class ExplorerController implements Disposable {
       case MessageType.TabChanged:
         this.activeTab = message.data;
         break;
+
+      case MessageType.PerformScan:
+        this.diagnosticCollection.clear();
     }
 
     this.onWebViewMessageEventEmitter.fire(message);
