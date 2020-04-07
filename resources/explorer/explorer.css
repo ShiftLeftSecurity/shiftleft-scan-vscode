@@ -358,7 +358,7 @@ li.codeflowselected:focus {
 
 #resultslisttable tbody tr:hover td,
 #resultslisttable tbody tr.selected td {
-  background-color: var(--layer4);
+  background-color: #1c253e;
 }
 
 #resultslisttable tbody tr.expanded th {
