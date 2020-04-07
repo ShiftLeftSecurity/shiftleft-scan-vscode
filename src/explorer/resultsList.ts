@@ -864,14 +864,17 @@ export class ResultsList {
     if (this.data) {
       resultCount = this.data.resultCount;
     }
+    const hiddenClass: string = "hide";
     // Show/hide empty results based on count
     scanRunning.hidden = true;
     if (!resultCount) {
       emptyResults.hidden = false;
+      emptyResults.classList.remove(hiddenClass);
       results.hidden = true;
     } else {
       emptyResults.hidden = true;
       results.hidden = false;
+      results.classList.remove(hiddenClass);
     }
     const countElement: HTMLElement | null = document.getElementById(
       "resultslistheadercount"

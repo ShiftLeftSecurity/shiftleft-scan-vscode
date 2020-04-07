@@ -69,6 +69,8 @@ export class Scan {
     if (Scan.scanInProgress) {
       return;
     }
+    // Mark the scan as in progress asap
+    Scan.scanInProgress = true;
     const sarifConfig: WorkspaceConfiguration = workspace.getConfiguration(
       Utilities.configSection
     );
@@ -77,9 +79,18 @@ export class Scan {
       "shiftleft/sast-scan"
     );
     const scanMode: string = sarifConfig.get(Scan.configScanMode, "ide");
-    const appRootFromConfig: string | undefined = sarifConfig.get(Scan.configAppRoot, undefined);
-    const disableTelemetry: boolean = sarifConfig.get(Scan.configDisableTelemetry, false);
-    const appRoot: string = appRootFromConfig && appRootFromConfig !== "" ? appRootFromConfig : workspace?.workspaceFolders![0].uri.path;
+    const appRootFromConfig: string | undefined = sarifConfig.get(
+      Scan.configAppRoot,
+      undefined
+    );
+    const disableTelemetry: boolean = sarifConfig.get(
+      Scan.configDisableTelemetry,
+      false
+    );
+    const appRoot: string =
+      appRootFromConfig && appRootFromConfig !== ""
+        ? appRootFromConfig
+        : workspace?.workspaceFolders![0].uri.fsPath;
     const cmdArgs: string[] = [
       "run",
       "--rm",
@@ -101,7 +112,6 @@ export class Scan {
     );
     outputChannel.show(true);
     const proc: ChildProcess = spawn("docker", cmdArgs, { shell: true });
-    Scan.scanInProgress = true;
     proc.stdout.on("data", async (data: string) => {
       setTimeout(async () => {
         outputChannel.appendLine(data);
