@@ -26,7 +26,7 @@ export interface SVDiagnosticsChangedEvent {
 }
 
 /**
- * Manager for the Diagnostic Collection contianing the sarif result diagnostics
+ * Manager for the Diagnostic Collection containing the sarif result diagnostics
  * Allows us to control which diagnostics we send to the Problems panel, so we can show a custom message on max entries
  * And lets us easily try to map those that weren't mapped previously
  */
