@@ -49,9 +49,15 @@ header.navbar .navbar-section {
 }
 
 .headercontainer > label:first-child::before {
-  font-size: 10px;
+  font-size: 18px;
+  padding-top: 2px;
+  margin-right: 5px;
   font-weight: normal;
   color: #ffffff;
+}
+
+.headercontainer.expanded > label:first-child::before {
+  font-size: 14px;
 }
 
 /* expand arrow */
@@ -314,6 +320,7 @@ li.codeflowselected:focus {
   text-decoration: none;
   text-align: center;
   outline: none;
+  border: none;
 }
 
 #scanBtn:focus,
@@ -327,7 +334,40 @@ li.codeflowselected:focus {
 }
 
 #results {
+  padding: 5px 0;
+}
+
+#resultslisttablecontainer {
+  padding: 5px 0;
+}
+
+#resultslisttable {
+  background: var(--layer1);
+}
+
+#resultslisttable thead th {
+  background: var(--layer2);
   padding: 5px;
+}
+
+#resultslisttable tbody th {
+  background: var(--layer2);
+  padding: 5px;
+  padding-left: 5px !important;
+}
+
+#resultslisttable tbody tr:hover {
+  background: var(--layer4);
+}
+
+#resultslisttable tbody td {
+  background: var(--layer3);
+  padding: 2px !important;
+  min-height: 10px;
+}
+
+#resultslisttable .listtablegroup.collapsed > th::before {
+  margin-right: 5px;
 }
 
 #resultslisttablecontainer {
@@ -352,11 +392,15 @@ li.codeflowselected:focus {
 
 #resultslisttable tbody td {
   background: var(--layer4);
-  padding: 2px !important;
 }
 
 #resultslisttable .listtablegroup.collapsed > th::before {
   margin-right: 5px;
+}
+
+#shiftleft-scan-docs {
+  margin: 20px 0;
+  display: block;
 }
 
 a {
