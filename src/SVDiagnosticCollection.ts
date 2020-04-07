@@ -374,12 +374,9 @@ export class SVDiagnosticCollection implements Disposable {
 
   /**
    * When a sarif document closes we need to clear all of the list of issues and reread the open sarif docs
-   * Can't selectivly remove issues becuase the issues don't have a link back to the sarif file it came from
+   * Can't selectively remove issues because the issues don't have a link back to the sarif file it came from
    * @param doc document that was closed
    */
   public onDocumentClosed(doc: TextDocument): void {
-    if (Utilities.isSarifFile(doc)) {
-      this.removeRuns(doc.fileName);
-    }
   }
 }

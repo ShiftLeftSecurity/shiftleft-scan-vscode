@@ -14,14 +14,14 @@ Use this extension to perform security scans and visualize the scan results with
   - Code flow steps
   - Attachments
   - Fixes
-- MacOS touch bar support
+- macOS touch bar support
 - Contributes a dark theme called `ShiftLeft`
 
 ## Results Viewer
 
 - Automatically launches after performing a scan or when the workspace contains .sarif files in reports directory
 - Updates the Result Details Panel with the currently selected result in the Results List, Problems Panel, or in source code
-- Manually open it by typing "ShiftLeft: ShiftLeft Scan Results" in the Command Palette(Ctrl+P or ⌘+P) or using the hotkey (Ctrl+L then Ctrl+E)
+- Manually open it by typing "ShiftLeft: View Results" in the Command Palette(Ctrl+P or ⌘+P) or using the hotkey (Ctrl+L then Ctrl+E)
 
 # Using
 
@@ -34,7 +34,7 @@ Use this extension to perform security scans and visualize the scan results with
 
 ## Use
 
-1. Perform a ShiftLeft Scan by using the `Perform Security Scan` option in the results window. Or in the Command Palette (Ctrl+Shift+p or ⌘+⇧+p) type "ShiftLeft: Perform Scan" or use the hotkey (Ctrl+l then Ctrl+p)
+1. Perform a ShiftLeft Scan by using the `Perform Security Scan` option in the results window. Or in the Command Palette (Ctrl+Shift+p or ⌘+⇧+p) type "ShiftLeft: Security Scan" or use the hotkey (Ctrl+l then Ctrl+p)
 2. Results will show up on the **Scan Findings** panel
 3. Click the result you're investigating. The editor will navigate to the location
 
@@ -55,7 +55,7 @@ For help and support installing and using this extension, please use: https://di
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
-
+- On Windows with Remote mode there are open defects to be resolved.
 - Internet connectivity is required while loading the results for the first time. You might see the below error otherwise.
 
 ```

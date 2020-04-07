@@ -131,6 +131,12 @@ export class ExplorerWebview {
         this.cleanUpResultDetails();
         this.resultsList.Data = JSON.parse(message.data);
         break;
+      case MessageType.PerformScan:
+        this.toggleScanRunning(true);
+        break;
+      case MessageType.ScanCompleted:
+        this.toggleScanRunning(false);
+        break;
     }
   }
 
@@ -1940,6 +1946,43 @@ export class ExplorerWebview {
       );
       while (elements.length > 0) {
         this.toggleTreeElement(<HTMLElement>elements[0], toggleToState);
+      }
+    }
+  }
+
+  private toggleScanRunning(shouldShow: boolean) {
+    const scanRunning: HTMLDivElement = getDocumentElementById(
+      document,
+      "scanRunning",
+      HTMLDivElement
+    );
+    const emptyResults: HTMLDivElement = getDocumentElementById(
+      document,
+      "emptyResults",
+      HTMLDivElement
+    );
+    const results: HTMLDivElement = getDocumentElementById(
+      document,
+      "results",
+      HTMLDivElement
+    );
+    const hiddenClass: string = "hide";
+    if (scanRunning) {
+      scanRunning.hidden = !shouldShow;
+      if (shouldShow) {
+        scanRunning.classList.remove(hiddenClass);
+      }
+    }
+    if (emptyResults) {
+      emptyResults.hidden = shouldShow;
+      if (!shouldShow) {
+        emptyResults.classList.remove(hiddenClass);
+      }
+    }
+    if (results) {
+      results.hidden = shouldShow;
+      if (!shouldShow) {
+        results.classList.remove(hiddenClass);
       }
     }
   }
