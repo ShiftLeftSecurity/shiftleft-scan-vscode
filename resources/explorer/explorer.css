@@ -99,12 +99,20 @@ li.expanded::before,
   color: #3ecf8e;
 }
 
+#result-details {
+  width: 96%;
+  padding-bottom: 20px;
+  margin: 0 5px;
+  position: absolute;
+}
+
 #resultdetailscontainer {
   display: flex;
   flex-flow: column nowrap;
   flex: 1 1 50vh;
   background-color: #1c253e;
   font-size: 12px;
+  padding-bottom: 20px;
 }
 
 div#resultdetailscontainer:empty {

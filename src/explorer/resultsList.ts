@@ -666,6 +666,7 @@ export class ResultsList {
       curSelected[0].classList.remove("selected");
     }
     row.classList.add("selected");
+    this.moveResultsNextToRow(row);
 
     const resultId: string | undefined = row.dataset.id;
     if (resultId === undefined) {
@@ -676,6 +677,17 @@ export class ResultsList {
       data: resultId,
       type: MessageType.ResultsListResultSelected,
     });
+  }
+
+  private moveResultsNextToRow(row: HTMLTableRowElement) {
+    const boundingRect: DOMRect = row.getBoundingClientRect();
+    const resultDetails: Element | null = document.querySelector(
+      "#result-details"
+    );
+    if (resultDetails) {
+      const top = boundingRect.y + boundingRect.height + 2;
+      resultDetails.setAttribute("style", `top: ${top}px`);
+    }
   }
 
   /**

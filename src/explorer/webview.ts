@@ -1807,6 +1807,7 @@ export class ExplorerWebview {
 
     if (newDiagnosticData.selectedRow !== undefined) {
       this.showTreeNode(newDiagnosticData.selectedRow, true);
+      console.log(newDiagnosticData.selectedRow);
     }
 
     if (newDiagnosticData.activeTab !== undefined) {
