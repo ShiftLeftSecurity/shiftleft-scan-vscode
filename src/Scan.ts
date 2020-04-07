@@ -60,7 +60,7 @@ export class Scan {
       relativeRoot = appRoot.replace(workspaceRoot + "/", "");
     }
     const sarifFiles: Uri[] = await workspace.findFiles(
-      relativeRoot + "/reports/*.sarif",
+      relativeRoot + "reports/*.sarif",
       "**/node_modules/**",
       5
     );
