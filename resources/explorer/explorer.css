@@ -356,7 +356,8 @@ li.codeflowselected:focus {
   padding-left: 5px !important;
 }
 
-#resultslisttable tbody tr:hover td {
+#resultslisttable tbody tr:hover td,
+#resultslisttable tbody tr.selected td {
   background-color: var(--layer4);
 }
 
