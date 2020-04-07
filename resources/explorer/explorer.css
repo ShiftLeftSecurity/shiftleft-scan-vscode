@@ -396,3 +396,6 @@ a {
 a:hover {
   color: #3ecf8e;
 }
+#tabcontainer > .tab {
+  border-bottom: none;
+}
