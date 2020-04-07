@@ -42,9 +42,13 @@ Use this extension to perform security scans and visualize the scan results with
 
 While working with large monorepo based repositories, configure the application root to limit the scanning to specific application directories. To do this, go to Preferences and search for "ShiftLeft". Specify the `App Root` as shown below:
 
-![AppRoot Preference](resources/readmeImages/vscode-pref.png)
+![AppRoot Preference](https://raw.githubusercontent.com/ShiftLeftSecurity/scan-action/master/docs/readmeImages/vscode-pref.png?raw=true)
 
 **NOTE:** This configuration can be specified for either the user or for the workspace. To set it for a particular workspace, choose the `Workspace` tab in the above settings screen.
+
+## Screenshots
+
+![Extension in Action](https://raw.githubusercontent.com/ShiftLeftSecurity/scan-action/master/docs/readmeImages/vscode.gif?raw=true)
 
 # Support
 
