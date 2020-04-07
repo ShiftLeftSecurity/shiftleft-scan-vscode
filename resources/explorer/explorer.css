@@ -68,6 +68,11 @@ li.collapsed::before,
   font-weight: normal;
 }
 
+#result-details > .headercontainer.collapsed > label:first-child::before,
+#result-details > .headercontainer.expanded > label:first-child::before {
+  content: "";
+}
+
 th {
   background-color: #272879;
   font-size: 14px;
