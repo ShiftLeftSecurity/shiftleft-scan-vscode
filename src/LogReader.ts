@@ -83,7 +83,7 @@ export class LogReader implements Disposable {
    */
   public async readWorkspace(): Promise<void> {
     const sarifFiles: Uri[] = await workspace.findFiles(
-      "reports/*.sarif",
+      "**/reports/*.sarif",
       "**/node_modules/**",
       3
     );

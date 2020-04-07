@@ -38,6 +38,14 @@ Use this extension to perform security scans and visualize the scan results with
 2. Results will show up on the **Scan Findings** panel
 3. Click the result you're investigating. The editor will navigate to the location
 
+## Monorepo support
+
+While working with large monorepo based repositories, configure the application root to limit the scanning to specific application directories. To do this, go to Preferences and search for "ShiftLeft". Specify the `App Root` as shown below:
+
+![AppRoot Preference](resources/readmeImages/vscode-pref.png)
+
+**NOTE:** This configuration can be specified for either the user or for the workspace. To set it for a particular workspace, choose the `Workspace` tab in the above settings screen.
+
 ## Screenshots
 
 ![Extension in Action](resources/readmeImages/vscode.gif?raw=true)
@@ -55,7 +63,6 @@ For help and support installing and using this extension, please use: https://di
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
-- On Windows with Remote mode there are open defects to be resolved.
 - Internet connectivity is required while loading the results for the first time. You might see the below error otherwise.
 
 ```

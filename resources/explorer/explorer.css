@@ -346,22 +346,27 @@ li.codeflowselected:focus {
 }
 
 #resultslisttable thead th {
-  background: var(--layer2);
+  background-color: var(--layer2);
   padding: 5px;
 }
 
 #resultslisttable tbody th {
-  background: var(--layer2);
+  background-color: var(--layer2);
   padding: 5px;
   padding-left: 5px !important;
 }
 
-#resultslisttable tbody tr:hover {
-  background: var(--layer4);
+#resultslisttable tbody tr:hover td,
+#resultslisttable tbody tr.selected td {
+  background-color: #1c253e;
+}
+
+#resultslisttable tbody tr.expanded th {
+  background-color: var(--layer5);
 }
 
 #resultslisttable tbody td {
-  background: var(--layer3);
+  background-color: var(--layer3);
   padding: 2px !important;
   min-height: 10px;
 }
@@ -371,31 +376,13 @@ li.codeflowselected:focus {
 }
 
 #resultslisttablecontainer {
-  background: var(--layer2);
+  background-color: var(--layer2);
   padding: 5px;
 }
 
 #resultslisttable {
-  background: var(--layer2);
-}
-
-#resultslisttable thead th {
-  background: var(--layer3);
-  padding: 5px;
-}
-
-#resultslisttable tbody th {
-  background: var(--layer3);
-  padding: 5px;
-  padding-left: 5px !important;
-}
-
-#resultslisttable tbody td {
-  background: var(--layer4);
-}
-
-#resultslisttable .listtablegroup.collapsed > th::before {
-  margin-right: 5px;
+  background-color: var(--layer2);
+  margin-right: 15px;
 }
 
 #shiftleft-scan-docs {
@@ -409,4 +396,7 @@ a {
 
 a:hover {
   color: #3ecf8e;
+}
+#tabcontainer > .tab {
+  border-bottom: none;
 }

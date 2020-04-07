@@ -48,9 +48,19 @@ export class Scan {
     return Scan.scanInProgress;
   }
 
-  public static async showResults(): Promise<void> {
+  /**
+   * Method to show results based on existing sarif files
+   *
+   * @string workspaceRoot Workspace root directory
+   * @string appRoot Application root directory
+   */
+  public static async showResults(workspaceRoot: string, appRoot: string): Promise<void> {
+    let relativeRoot: string = "";
+    if (workspaceRoot !== appRoot) {
+      relativeRoot = appRoot.replace(workspaceRoot + "/", "");
+    }
     const sarifFiles: Uri[] = await workspace.findFiles(
-      "reports/*.sarif",
+      relativeRoot + "reports/*.sarif",
       "**/node_modules/**",
       5
     );
@@ -87,10 +97,11 @@ export class Scan {
       Scan.configDisableTelemetry,
       false
     );
+    const workspaceRoot: string = workspace?.workspaceFolders![0].uri.fsPath;
     const appRoot: string =
       appRootFromConfig && appRootFromConfig !== ""
         ? appRootFromConfig
-        : workspace?.workspaceFolders![0].uri.fsPath;
+        : workspaceRoot;
     const cmdArgs: string[] = [
       "run",
       "--rm",
@@ -98,7 +109,7 @@ export class Scan {
       '"WORKSPACE=' + appRoot + '"',
       "-v",
       '"' + appRoot + ':/app:cached"',
-      disableTelemetry ? "DISABLE_TELEMETRY=true" : "",
+      disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
       containerImage,
       "scan",
       "--mode",
@@ -116,7 +127,7 @@ export class Scan {
       setTimeout(async () => {
         outputChannel.appendLine(data);
         if (data.includes("========")) {
-          await Scan.showResults();
+          await Scan.showResults(workspaceRoot, appRoot);
         }
       }, 500);
     });
@@ -124,7 +135,7 @@ export class Scan {
       setTimeout(async () => {
         outputChannel.appendLine(data);
         if (data.includes("========")) {
-          await Scan.showResults();
+          await Scan.showResults(workspaceRoot, appRoot);
         }
       }, 500);
     });
@@ -137,7 +148,7 @@ export class Scan {
         );
       } else {
         outputChannel.appendLine("ShiftLeft Scan completed successfully 👍");
-        await Scan.showResults();
+        await Scan.showResults(workspaceRoot, appRoot);
       }
     });
   }
