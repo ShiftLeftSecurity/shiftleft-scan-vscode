@@ -680,14 +680,35 @@ export class ResultsList {
   }
 
   private moveResultsNextToRow(row: HTMLTableRowElement) {
-    const boundingRect: DOMRect = row.getBoundingClientRect();
-    const resultDetails: Element | null = document.querySelector(
-      "#result-details"
-    );
-    if (resultDetails) {
-      const top = boundingRect.y + boundingRect.height + 2;
-      resultDetails.setAttribute("style", `top: ${top}px`);
-    }
+    setTimeout(() => {
+      const resultDetails: Element | null = document.querySelector(
+        "#result-details"
+      );
+
+      if (resultDetails) {
+        let tempRow: HTMLTableRowElement | null = document.querySelector(
+          "#temp-row"
+        );
+        if (!tempRow) {
+          tempRow = document.createElement("tr");
+          tempRow.setAttribute("id", "temp-row");
+          const tempCell = document.createElement("td");
+          tempCell.setAttribute("colspan", "5");
+          tempRow.appendChild(tempCell);
+        } else {
+          tempRow.remove();
+        }
+        if (tempRow) {
+          const tempCell: HTMLTableCellElement | null = tempRow.querySelector(
+            "td"
+          );
+          if (tempCell != null) {
+            tempCell.appendChild(resultDetails);
+            row.insertAdjacentElement("afterend", tempRow);
+          }
+        }
+      }
+    }, 500);
   }
 
   /**

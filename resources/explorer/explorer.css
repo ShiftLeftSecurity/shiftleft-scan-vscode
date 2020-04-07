@@ -100,10 +100,8 @@ li.expanded::before,
 }
 
 #result-details {
-  width: 96%;
-  padding-bottom: 20px;
-  margin: 0 5px;
-  position: absolute;
+  width: 100%;
+  padding: 0 10px;
 }
 
 #resultdetailscontainer {
@@ -366,6 +364,10 @@ li.codeflowselected:focus {
 
 #resultslisttable tbody tr:hover td,
 #resultslisttable tbody tr.selected td {
+  background-color: #1c253e;
+}
+
+#resultslisttable tbody tr#temp-row td {
   background-color: #1c253e;
 }
 
