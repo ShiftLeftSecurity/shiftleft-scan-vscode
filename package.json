@@ -4,7 +4,7 @@
   "description": "ShiftLeft Scan is a free commercial-grade security tool for modern DevOps teams",
   "author": "ShiftLeft Inc",
   "license": "UNLICENSED",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "publisher": "ShiftLeftSecurity",
   "homepage": "https://shiftleft.io",
   "repository": {
@@ -54,13 +54,6 @@
         }
       ]
     },
-    "themes": [
-      {
-        "label": "ShiftLeft",
-        "uiTheme": "vs-dark",
-        "path": "./resources/shiftleft.json"
-      }
-    ],
     "configuration": {
       "title": "ShiftLeft Scan",
       "properties": {
