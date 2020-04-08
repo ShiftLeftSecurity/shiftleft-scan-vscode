@@ -15,7 +15,6 @@ Use this extension to perform security scans and visualize the scan results with
   - Attachments
   - Fixes
 - macOS touch bar support
-- Contributes a dark theme called `ShiftLeft`
 
 ## Results Viewer
 
