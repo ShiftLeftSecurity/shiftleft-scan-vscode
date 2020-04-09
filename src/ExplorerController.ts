@@ -363,7 +363,7 @@ export class ExplorerController implements Disposable {
             <div id="emptyResults" class="${resultsClass}">
               <div class="columns col-gapless"><div class="column col-12">
                 <div class="empty">
-                  <p class="empty-title h3">No Scan Result found</p>
+                  <p class="empty-title h3">Welcome back</p>
                   <p class="empty-subtitle">Click the button to scan your project</p>
                   <div class="empty-action">
                     <button class="btn btn-primary" id="scanBtn">Perform Security Scan</button>
