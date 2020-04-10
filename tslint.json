@@ -1,14 +1,6 @@
 {
     "rules": {
         "curly": true,
-        "file-header": [
-            true,
-            {
-                "match": "Copyright \\(c\\) ShiftLeft Inc\\. All Rights Reserved\\.",
-                "default": "Copyright (c) ShiftLeft Inc. All Rights Reserved.",
-                "allow-single-line-comments": true
-            }
-        ],
         "indent": [
             true,
             "spaces",
