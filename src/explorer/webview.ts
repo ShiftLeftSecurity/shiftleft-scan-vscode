@@ -904,12 +904,14 @@ export class ExplorerWebview {
       )
     );
 
+    /*
     if (resultInfo.kind !== undefined) {
       const kind: TextAndTooltip = this.kindTextAndTooltip(resultInfo.kind);
       tableEle.appendChild(
         this.createNameValueRow("Kind:", kind.text, kind.tooltip)
       );
     }
+    */
 
     if (resultInfo.rank !== undefined) {
       tableEle.appendChild(
@@ -930,6 +932,7 @@ export class ExplorerWebview {
       );
     }
 
+    /*
     if (resultInfo.ruleHelpUri !== undefined) {
       const cellContents: HTMLAnchorElement = this.createElement("a", {
         text: resultInfo.ruleHelpUri,
@@ -937,6 +940,7 @@ export class ExplorerWebview {
       cellContents.href = resultInfo.ruleHelpUri;
       tableEle.appendChild(this.createRowWithContents("Help: ", cellContents));
     }
+    */
 
     let row: HTMLTableRowElement | undefined = this.createLocationsRow(
       "Locations: ",
@@ -972,7 +976,7 @@ export class ExplorerWebview {
         this.createPropertiesRow(resultInfo.additionalProperties)
       );
     }
-
+    /*
     if (resultInfo.locationInSarifFile) {
       row = this.createLocationsRow("Location in Log: ", [
         resultInfo.locationInSarifFile,
@@ -981,7 +985,7 @@ export class ExplorerWebview {
         tableEle.appendChild(row);
       }
     }
-
+    */
     panel.appendChild(tableEle);
 
     return panel;

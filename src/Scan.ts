@@ -37,6 +37,10 @@ export class Scan {
   private static readonly configScanMode = "scanMode";
   private static readonly configDisableTelemetry = "disableTelemetry";
   private static readonly configAppRoot = "appRoot";
+  private static readonly configAppName = "appName";
+  private static readonly configOrgId = "orgId";
+  private static readonly configOrgToken = "orgToken";
+  private static readonly configAccessToken = "accessToken";
 
   public static initialize(extensionContext: vscode.ExtensionContext): void {
     Scan.registerCommands(extensionContext);
@@ -88,6 +92,32 @@ export class Scan {
   }
 
   /**
+   * Method to delete existing sarif files
+   *
+   * @string workspaceRoot Workspace root directory
+   * @string appRoot Application root directory
+   */
+  public static async deleteResults(
+    workspaceRoot: string,
+    appRoot: string
+  ): Promise<void> {
+    let relativeRoot: string = "";
+    if (workspaceRoot !== appRoot) {
+      relativeRoot = appRoot.replace(workspaceRoot + "/", "");
+    }
+    const sarifFiles: Uri[] = await workspace.findFiles(
+      relativeRoot + "reports/*.sarif",
+      "**/node_modules/**",
+      5
+    );
+    if (sarifFiles && sarifFiles.length) {
+      for (const f in sarifFiles) {
+        await workspace.fs.delete(sarifFiles[f], {useTrash: true});
+      }
+    }
+  }
+
+  /**
    * Perform ShiftLeft Scan
    */
   public static async performSastScan(): Promise<void> {
@@ -108,20 +138,50 @@ export class Scan {
       Scan.configAppRoot,
       undefined
     );
+    const appNameFromConfig: string | undefined = sarifConfig.get(
+      Scan.configAppName,
+      undefined
+    );
     const disableTelemetry: boolean = sarifConfig.get(
       Scan.configDisableTelemetry,
       false
     );
+    const orgId: string | undefined = sarifConfig.get(
+      Scan.configOrgId,
+      undefined
+    );
+    const orgToken: string | undefined = sarifConfig.get(
+      Scan.configOrgToken,
+      undefined
+    );
+    const accessToken: string | undefined = sarifConfig.get(
+      Scan.configAccessToken,
+      undefined
+    );
     const workspaceRoot: string = workspace?.workspaceFolders![0].uri.fsPath;
+    const workspaceName: string = workspace?.workspaceFolders![0].name;
     const appRoot: string =
       appRootFromConfig && appRootFromConfig !== ""
         ? appRootFromConfig
         : workspaceRoot;
-    const cmdArgs: string[] = [
+    const appName: string =
+      appNameFromConfig && appNameFromConfig !== ""
+        ? appNameFromConfig
+        : workspaceName;
+    const inspectArgs: string[] = [
+      "",
+      appName ? '"SHIFTLEFT_APP=' + appName + '"' : "",
+      orgId ? '"SHIFTLEFT_ORG_ID=' + orgId + '"' : "",
+      orgToken ? '"SHIFTLEFT_ORG_TOKEN=' + orgToken + '"' : "",
+      accessToken ? '"SHIFTLEFT_ACCESS_TOKEN=' + accessToken + '"' : "",
+    ];
+    const isInspectEnabled: boolean = !!orgId && !!orgToken && !!accessToken;
+    let cmdArgs: string[] = [
       "run",
       "--rm",
       "-e",
       '"WORKSPACE=' + appRoot + '"',
+      isInspectEnabled ? inspectArgs.join(" -e ") : "",
       "-v",
       '"' + appRoot + ':/app:cached"',
       disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
@@ -130,28 +190,33 @@ export class Scan {
       "--mode",
       scanMode,
     ];
+    cmdArgs = cmdArgs.filter(v => v !== "");
     const outputChannel: OutputChannel = window.createOutputChannel(
-      "ShiftLeft Scan"
+      isInspectEnabled ? "ShiftLeft Inspect" : "ShiftLeft Scan"
     );
-    outputChannel.appendLine(
-      `⚡︎ About to execute docker ${cmdArgs.join(" ")}`
-    );
+    if (isInspectEnabled) {
+      outputChannel.appendLine(`⚡︎ ShiftLeft Inspect scan has started ...`);
+    } else {
+      outputChannel.appendLine(`⚡︎ Security scan has started ...`);
+    }
+
     outputChannel.show(true);
+    await Scan.deleteResults(workspaceRoot, appRoot);
     const proc: ChildProcess = spawn("docker", cmdArgs, { shell: true });
     proc.stdout.on("data", async (data: string) => {
       setTimeout(async () => {
-        outputChannel.appendLine(data);
         if (data.includes("========")) {
           await Scan.showResults(workspaceRoot, appRoot);
         }
+        outputChannel.appendLine(data);
       }, 500);
     });
     proc.stderr.on("data", async (data: string) => {
       setTimeout(async () => {
-        outputChannel.appendLine(data);
         if (data.includes("========")) {
           await Scan.showResults(workspaceRoot, appRoot);
         }
+        outputChannel.appendLine(data);
       }, 500);
     });
     proc.on("close", async (code) => {
@@ -162,8 +227,8 @@ export class Scan {
           { modal: false }
         );
       } else {
-        outputChannel.appendLine("ShiftLeft Scan completed successfully 👍");
         await Scan.showResults(workspaceRoot, appRoot);
+        outputChannel.hide();
       }
     });
   }

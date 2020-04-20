@@ -280,13 +280,13 @@ export namespace LocationFactory {
     let eol: boolean = false;
 
     if (region !== undefined) {
-      if (region.startLine !== undefined) {
+      if (region.startLine) {
         startline = region.startLine - 1;
         if (region.startColumn !== undefined) {
           startcol = region.startColumn - 1;
         }
 
-        if (region.endLine !== undefined) {
+        if (region.endLine) {
           endline = region.endLine - 1;
         } else {
           endline = startline;
@@ -296,7 +296,9 @@ export namespace LocationFactory {
           endcol = region.endColumn - 1;
         } else if (region.snippet !== undefined) {
           if (region.snippet.text !== undefined) {
-            endcol = region.snippet.text.length - 2;
+            if (region.snippet.text.length > 2) {
+              endcol = region.snippet.text.length - 2;
+            }
           } else if (region.snippet.binary !== undefined) {
             endcol = Buffer.from(region.snippet.binary, "base64").toString()
               .length;

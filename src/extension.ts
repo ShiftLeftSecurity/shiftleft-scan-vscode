@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License
 along with Scan.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { ExtensionContext } from "vscode";
+import { ExtensionContext, commands } from "vscode";
 import { CodeFlowCodeLensProvider } from "./CodeFlowCodeLens";
 import { CodeFlowDecorations } from "./CodeFlowDecorations";
 import { ExplorerController } from "./ExplorerController";
@@ -31,6 +31,9 @@ import { FileMapper } from "./FileMapper";
  * Process any open SARIF Files
  */
 export async function activate(context: ExtensionContext): Promise<void> {
+  // Fix the editor layout
+  await commands.executeCommand('vscode.setEditorLayout', {orientation: 0, groups: [{ groups: [{}], size: 0.5 }, { groups: [{}], size: 0.5 }]});
+
   Utilities.initialize(context);
   Scan.initialize(context);
 

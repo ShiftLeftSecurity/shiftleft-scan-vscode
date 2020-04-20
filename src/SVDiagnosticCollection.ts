@@ -27,6 +27,7 @@ import {
   Disposable,
   workspace,
   TextDocument,
+  FileDeleteEvent,
 } from "vscode";
 import { RunInfo } from "./common/Interfaces";
 import { Utilities } from "./Utilities";
@@ -86,9 +87,8 @@ export class SVDiagnosticCollection implements Disposable {
       this.fileMapper.onMappingChanged(this.mappingChanged.bind(this))
     );
     this.disposables.push(this.fileMapper);
-
     this.disposables.push(
-      workspace.onDidCloseTextDocument(this.onDocumentClosed.bind(this))
+      workspace.onDidDeleteFiles(this.onDocumentDeleted.bind(this))
     );
   }
 
@@ -260,7 +260,7 @@ export class SVDiagnosticCollection implements Disposable {
   }
 
   /**
-   * Itterates through the issue collections and removes any results that originated from the file
+   * Iterates through the issue collections and removes any results that originated from the file
    * @param path Path (including file) of the file that has the runs to be removed
    */
   public removeRuns(path: string): void {
@@ -394,5 +394,19 @@ export class SVDiagnosticCollection implements Disposable {
     if (Utilities.isSarifFile(doc)) {
       this.removeRuns(doc.fileName);
     }
+  }
+
+  /**
+   * When a sarif document closes we need to clear all of the list of issues and reread the open sarif docs
+   * Can't selectively remove issues because the issues don't have a link back to the sarif file it came from
+   * @param evt File delete event
+   */
+  public onDocumentDeleted(evt: FileDeleteEvent): void {
+    const files: readonly Uri[] = evt.files;
+    files.forEach(f => {
+      if (Utilities.isSarifFile(f.fsPath)) {
+        this.removeRuns(f.fsPath);
+      }
+    });
   }
 }

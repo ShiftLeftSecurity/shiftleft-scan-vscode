@@ -4,7 +4,7 @@
   "description": "ShiftLeft Scan is a free commercial-grade security tool for modern DevOps teams",
   "author": "ShiftLeft Inc",
   "license": "GPL-3.0-or-later",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "publisher": "ShiftLeftSecurity",
   "homepage": "https://shiftleft.io",
   "repository": {
@@ -59,13 +59,33 @@
       "properties": {
         "shiftleft-scan.containerImage": {
           "type": "string",
-          "default": "shiftleft/sast-scan",
-          "description": "Scan container image to use"
+          "default": "shiftleft/sast-scan:latest",
+          "description": "Scan container image to use. Leave default."
+        },
+        "shiftleft-scan.appName": {
+          "type": "string",
+          "default": "",
+          "description": "Application name. Override while performing ShiftLeft Insepct cloud based scans."
         },
         "shiftleft-scan.appRoot": {
           "type": "string",
           "default": "",
-          "description": "Application root. Set this when using a monorepo with multiple applications"
+          "description": "Application root. Set this when using a monorepo with multiple applications."
+        },
+        "shiftleft-scan.orgId": {
+          "type": "string",
+          "default": "",
+          "description": "ShiftLeft Inspect organization id for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+        },
+        "shiftleft-scan.orgToken": {
+          "type": "string",
+          "default": "",
+          "description": "ShiftLeft Inspect organization token (aka Public API Token) for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+        },
+        "shiftleft-scan.accessToken": {
+          "type": "string",
+          "default": "",
+          "description": "ShiftLeft Inspect access token for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.disableTelemetry": {
           "type": "boolean",
@@ -99,7 +119,7 @@
             "logicalLocation",
             "resultStartPos"
           ],
-          "description": "The list of columns to hide from the results list",
+          "description": "The list of columns to hide from the results list.",
           "type": "array",
           "items": {
             "enum": [
@@ -118,7 +138,7 @@
         },
         "shiftleft-scan.resultsListGroupBy": {
           "default": "resultFile",
-          "description": "The column to group the results list by",
+          "description": "The column to group the results list by.",
           "type": "string",
           "enum": [
             "kind",
@@ -136,7 +156,7 @@
             "column": "severityLevel",
             "ascending": false
           },
-          "description": "The column to sort the results list by(per group) and the order",
+          "description": "The column to sort the results list by(per group) and the order.",
           "type": "object",
           "properties": {
             "column": {

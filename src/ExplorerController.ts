@@ -145,7 +145,7 @@ export class ExplorerController implements Disposable {
   public createWebview(): WebviewPanel {
     if (this.wvPanel) {
       if (!this.wvPanel.visible) {
-        this.wvPanel.reveal(undefined, false);
+        this.wvPanel.reveal(ViewColumn.Two, false);
         this.diagnosticCollection.clear();
       }
     } else {
