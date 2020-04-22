@@ -32,7 +32,13 @@ import { FileMapper } from "./FileMapper";
  */
 export async function activate(context: ExtensionContext): Promise<void> {
   // Fix the editor layout
-  await commands.executeCommand('vscode.setEditorLayout', {orientation: 0, groups: [{ groups: [{}], size: 0.5 }, { groups: [{}], size: 0.5 }]});
+  await commands.executeCommand("vscode.setEditorLayout", {
+    orientation: 0,
+    groups: [
+      { groups: [{}], size: 0.5 },
+      { groups: [{}], size: 0.5 },
+    ],
+  });
 
   Utilities.initialize(context);
   Scan.initialize(context);

@@ -402,9 +402,6 @@ export class ExplorerController implements Disposable {
             </div>
             <div id="results" class="${resultsClass}">
               <div class="columns">
-                <div class="column col-ml-auto col-4 p-1 pr-2">
-                  <button class="btn btn-primary float-right" id="scanBtn">Perform new Security Scan</button>
-                </div>
                 <div class="column col-12">
                   <div id="resultslistheader" class="headercontainer expanded"></div>
                   <div id="resultslistcontainer">

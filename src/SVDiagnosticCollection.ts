@@ -81,6 +81,7 @@ export class SVDiagnosticCollection implements Disposable {
     this.disposables.push(this.diagnosticCollection);
 
     // @ts-ignore: _maxDiagnosticsPerFile does exist on the DiagnosticCollection object
+    // prettier-ignore
     SVDiagnosticCollection.MaxDiagCollectionSize = this.diagnosticCollection._maxDiagnosticsPerFile - 1;
 
     this.disposables.push(
@@ -403,7 +404,7 @@ export class SVDiagnosticCollection implements Disposable {
    */
   public onDocumentDeleted(evt: FileDeleteEvent): void {
     const files: readonly Uri[] = evt.files;
-    files.forEach(f => {
+    files.forEach((f) => {
       if (Utilities.isSarifFile(f.fsPath)) {
         this.removeRuns(f.fsPath);
       }

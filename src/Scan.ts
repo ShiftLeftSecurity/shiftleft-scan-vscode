@@ -112,7 +112,7 @@ export class Scan {
     );
     if (sarifFiles && sarifFiles.length) {
       for (const f in sarifFiles) {
-        await workspace.fs.delete(sarifFiles[f], {useTrash: true});
+        await workspace.fs.delete(sarifFiles[f], { useTrash: true });
       }
     }
   }
@@ -190,7 +190,7 @@ export class Scan {
       "--mode",
       scanMode,
     ];
-    cmdArgs = cmdArgs.filter(v => v !== "");
+    cmdArgs = cmdArgs.filter((v) => v !== "");
     const outputChannel: OutputChannel = window.createOutputChannel(
       isInspectEnabled ? "ShiftLeft Inspect" : "ShiftLeft Scan"
     );
