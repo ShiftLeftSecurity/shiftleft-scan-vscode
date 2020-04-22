@@ -24,6 +24,7 @@ Use this extension to perform security scans and visualize the scan results with
   - Attachments
   - Fixes
 - macOS touch bar support
+- Upgrade to [Inspect](https://www.shiftleft.io/register) to perform cloud-based deep analysis
 
 ## Results Viewer
 
@@ -38,13 +39,24 @@ Use this extension to perform security scans and visualize the scan results with
 1. Install or upgrade [Visual Studio Code](https://code.visualstudio.com/). Requires version 1.41.0 or higher.
 2. Install the ShiftLeft Scan Extension
 3. Reload VS Code
-4. Install Docker Desktop for performing ShiftLeft Scan
+4. Install Docker Desktop for performing ShiftLeft Scan. Upon first scan, a container image called `shiftleft/scan` will get downloaded which performs the scans locally.
 
 ## Use
 
 1. Perform a ShiftLeft Scan by using the `Perform Security Scan` option in the results window. Or in the Command Palette (Ctrl+Shift+p or ⌘+⇧+p) type "ShiftLeft: Security Scan" or use the hotkey (Ctrl+l then Ctrl+p)
 2. Results will show up on the **Scan Findings** panel
 3. Click the result you're investigating. The editor will navigate to the location
+
+## Upgrading to ShiftLeft Inspect
+
+ShiftLeft [Inspect](https://www.shiftleft.io/inspect/) is a modern code analysis solution, purpose-built to support developer workflows. To upgrade to inspect, follow the below steps:
+
+1. [Signup](https://www.shiftleft.io/register) for inspect
+2. Visit the account settings and copy the Org ID, Access Token and Public API Token (referred to as `Org Token`)
+3. Go to preferences and search for "ShiftLeft". Set the values for Org ID and the two tokens copied above.
+4. Perform a scan which should automatically use Inspect cloud analysis for supported languages such as Java, .Net etc.
+
+**NOTE:** Public API token is not automatically enabled for all users. If you do not see this token, please [contact](https://www.shiftleft.io/contact/) support to get it enabled.
 
 ## Monorepo support
 
