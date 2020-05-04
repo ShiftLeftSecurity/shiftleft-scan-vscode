@@ -15,7 +15,14 @@ along with Scan.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import * as vscode from "vscode";
-import { ChildProcess, spawn } from "child_process";
+import { platform } from "os";
+import {
+  ChildProcess,
+  spawn,
+  spawnSync,
+  SpawnSyncReturns,
+  ExecOptions,
+} from "child_process";
 import {
   commands,
   OutputChannel,
@@ -31,6 +38,9 @@ export class Scan {
    * Flag to indicate if a scan is in progress
    */
   private static scanInProgress: boolean = false;
+
+  // Variable to track if scan cli is available locally
+  private static scanCliAvailable: boolean = false;
 
   // Configuration keys
   private static readonly configContainerImage = "containerImage";
@@ -55,6 +65,22 @@ export class Scan {
         Scan.performSastScan
       )
     );
+  }
+
+  /**
+   * Method to check if local cli is available
+   */
+  public static checkLocalCommand(): boolean {
+    if (Scan.scanCliAvailable) {
+      return true;
+    }
+    const isWin: boolean = platform().indexOf("win") > -1;
+    const where: string = isWin ? "where" : "whereis";
+    const ret: SpawnSyncReturns<String> = spawnSync(where, ["scan"]);
+    if (ret.status === 0 && !ret.error) {
+      Scan.scanCliAvailable = true;
+    }
+    return Scan.scanCliAvailable;
   }
 
   /**
@@ -175,21 +201,41 @@ export class Scan {
       orgToken ? '"SHIFTLEFT_ORG_TOKEN=' + orgToken + '"' : "",
       accessToken ? '"SHIFTLEFT_ACCESS_TOKEN=' + accessToken + '"' : "",
     ];
+
+    // Process environment variables
+    const env: ExecOptions["env"] = {
+      WORKSPACE: appRoot,
+    };
     const isInspectEnabled: boolean = !!orgId && !!orgToken && !!accessToken;
-    let cmdArgs: string[] = [
-      "run",
-      "--rm",
-      "-e",
-      '"WORKSPACE=' + appRoot + '"',
-      isInspectEnabled ? inspectArgs.join(" -e ") : "",
-      "-v",
-      '"' + appRoot + ':/app:cached"',
-      disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
-      containerImage,
-      "scan",
-      "--mode",
-      scanMode,
-    ];
+    if (isInspectEnabled) {
+      env["SHIFTLEFT_ORG_ID"] = orgId;
+      env["SHIFTLEFT_ORG_TOKEN"] = orgToken;
+      env["SHIFTLEFT_ACCESS_TOKEN"] = accessToken;
+    }
+    if (disableTelemetry) {
+      env["DISABLE_TELEMETRY"] = true;
+    }
+    let cmdArgs: string[] = [];
+    let baseCmd: string = "docker";
+    if (Scan.checkLocalCommand()) {
+      cmdArgs = ["--src", appRoot, "--mode", scanMode];
+      baseCmd = "scan";
+    } else {
+      cmdArgs = [
+        "run",
+        "--rm",
+        "-e",
+        '"WORKSPACE=' + appRoot + '"',
+        isInspectEnabled ? inspectArgs.join(" -e ") : "",
+        "-v",
+        '"' + appRoot + ':/app:cached"',
+        disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
+        containerImage,
+        "scan",
+        "--mode",
+        scanMode,
+      ];
+    }
     cmdArgs = cmdArgs.filter((v) => v !== "");
     const outputChannel: OutputChannel = window.createOutputChannel(
       isInspectEnabled ? "ShiftLeft Inspect" : "ShiftLeft Scan"
@@ -202,7 +248,10 @@ export class Scan {
 
     outputChannel.show(true);
     await Scan.deleteResults(workspaceRoot, appRoot);
-    const proc: ChildProcess = spawn("docker", cmdArgs, { shell: true });
+    const proc: ChildProcess = spawn(baseCmd, cmdArgs, {
+      shell: true,
+      env: env,
+    });
     proc.stdout.on("data", async (data: string) => {
       setTimeout(async () => {
         if (data.includes("========")) {

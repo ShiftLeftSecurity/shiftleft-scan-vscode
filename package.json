@@ -1,10 +1,10 @@
 {
   "name": "shiftleft-scan",
   "displayName": "ShiftLeft Scan",
-  "description": "ShiftLeft Scan is a free commercial-grade security tool for modern DevOps teams",
+  "description": "ShiftLeft Scan is a free open-source security tool for modern DevOps teams",
   "author": "ShiftLeft Inc",
   "license": "GPL-3.0-or-later",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "publisher": "ShiftLeftSecurity",
   "homepage": "https://shiftleft.io",
   "repository": {
@@ -59,8 +59,14 @@
       "properties": {
         "shiftleft-scan.containerImage": {
           "type": "string",
-          "default": "shiftleft/sast-scan:latest",
-          "description": "Scan container image to use. Leave default."
+          "default": "shiftleft/scan:latest",
+          "description": "Scan container image to use. Leave as default.",
+          "enum": [
+            "shiftleft/scan:latest",
+            "shiftleft/scan-java:latest",
+            "shiftleft/scan-csharp:latest",
+            "shiftleft/scan-oss:latest"
+          ]
         },
         "shiftleft-scan.appName": {
           "type": "string",

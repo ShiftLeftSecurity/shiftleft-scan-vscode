@@ -88,9 +88,11 @@ export class SVDiagnosticCollection implements Disposable {
       this.fileMapper.onMappingChanged(this.mappingChanged.bind(this))
     );
     this.disposables.push(this.fileMapper);
-    this.disposables.push(
-      workspace.onDidDeleteFiles(this.onDocumentDeleted.bind(this))
-    );
+    if (typeof workspace.onDidDeleteFiles === "function") {
+      this.disposables.push(
+        workspace.onDidDeleteFiles(this.onDocumentDeleted.bind(this))
+      );
+    }
   }
 
   public dispose(): void {

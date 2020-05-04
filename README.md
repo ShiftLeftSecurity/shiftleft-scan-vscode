@@ -9,9 +9,9 @@
 ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
 ```
 
-ShiftLeft [Scan](https://docs.shiftleft.io/shiftleft/scan/scan) is a free and open-source commercial-grade security tool for modern DevOps teams. With an integrated multi-scanner based design, Scan can detect various kinds of security flaws in your application and infrastructure code in a single fast scan. The product supports a range of integration options: from scanning every push via a git hook to scanning every build and pull-request in the CI/CD pipelines such as Azure DevOps Pipelines, GitHub actions and so on. Scan products are open-source under a GNU GPL 3.0 or later (GPL-3.0-or-later) license.
+ShiftLeft [Scan](https://docs.shiftleft.io/shiftleft/scan/scan) is a free and open-source security tool for modern DevOps teams. With an integrated multi-scanner based design, Scan can detect various kinds of security flaws in your application and infrastructure code in a single fast scan without the need for any remote server! The product supports a range of integration options: from scanning every push via a git hook to scanning every build and pull-request in the CI/CD pipelines such as Azure DevOps Pipelines, GitHub actions and so on. Scan products are open-source under a GNU GPL 3.0 or later (GPL-3.0-or-later) license.
 
-Use this extension to perform security scans and visualize the scan results without leaving your IDE. Navigate to the source code and remediate the results by interacting with the scan results.
+Use this extension to perform security scans locally in your desktop or the cloud workspace and visualize the scan results without leaving your IDE. Navigate to the source code and remediate the results by interacting with the scan results.
 
 ## **Features**
 
@@ -46,15 +46,6 @@ Use this extension to perform security scans and visualize the scan results with
 1. Perform a ShiftLeft Scan by using the `Perform Security Scan` option in the results window. Or in the Command Palette (Ctrl+Shift+p or ⌘+⇧+p) type "ShiftLeft: Security Scan" or use the hotkey (Ctrl+l then Ctrl+p)
 2. Results will show up on the **Scan Findings** panel
 3. Click the result you're investigating. The editor will navigate to the location
-
-## Upgrading to ShiftLeft Inspect
-
-ShiftLeft [Inspect](https://www.shiftleft.io/inspect/) is a modern code analysis solution, purpose-built to support developer workflows. To upgrade to inspect, follow the below steps:
-
-1. [Signup](https://www.shiftleft.io/register) for inspect
-2. Visit the account settings and copy the Org ID, Access Token and Public API Token (referred to as `Org Token`)
-3. Go to preferences and search for "ShiftLeft". Set the values for Org ID and the two tokens copied above.
-4. Perform a scan which should automatically use Inspect cloud analysis for supported languages such as Java, .Net etc.
 
 **NOTE:** Public API token is not automatically enabled for all users. If you do not see this token, please [contact](https://www.shiftleft.io/contact/) support to get it enabled.
 

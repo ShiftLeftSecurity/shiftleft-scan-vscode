@@ -31,14 +31,16 @@ import { FileMapper } from "./FileMapper";
  * Process any open SARIF Files
  */
 export async function activate(context: ExtensionContext): Promise<void> {
-  // Fix the editor layout
-  await commands.executeCommand("vscode.setEditorLayout", {
-    orientation: 0,
-    groups: [
-      { groups: [{}], size: 0.5 },
-      { groups: [{}], size: 0.5 },
-    ],
-  });
+  try {
+    // Fix the editor layout
+    await commands.executeCommand("vscode.setEditorLayout", {
+      orientation: 0,
+      groups: [
+        { groups: [{}], size: 0.5 },
+        { groups: [{}], size: 0.5 },
+      ],
+    });
+  } catch (e) {}
 
   Utilities.initialize(context);
   Scan.initialize(context);
