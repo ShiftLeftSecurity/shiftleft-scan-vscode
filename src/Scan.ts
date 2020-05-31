@@ -257,7 +257,9 @@ export class Scan {
     outputChannel.appendLine(baseCmd);
     outputChannel.appendLine(cmdArgs.join(" "));
     outputChannel.show(true);
-    await Scan.deleteResults(workspaceRoot, appRoot);
+    if (baseCmd !== "podman") {
+      await Scan.deleteResults(workspaceRoot, appRoot);
+    }
     const proc: ChildProcess = spawn(baseCmd, cmdArgs, {
       shell: true,
       env: env,
