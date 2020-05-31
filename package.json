@@ -57,6 +57,15 @@
     "configuration": {
       "title": "ShiftLeft Scan",
       "properties": {
+        "shiftleft-scan.containerTool": {
+          "type": "string",
+          "default": "docker",
+          "description": "Container tool to use. Change to podman if it is supported",
+          "enum": [
+            "docker",
+            "podman"
+          ]
+        },
         "shiftleft-scan.containerImage": {
           "type": "string",
           "default": "shiftleft/scan:latest",

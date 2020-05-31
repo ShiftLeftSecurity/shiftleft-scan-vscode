@@ -43,6 +43,7 @@ export class Scan {
   private static scanCliAvailable: boolean = false;
 
   // Configuration keys
+  private static readonly configContainerTool = "containerTool";
   private static readonly configContainerImage = "containerImage";
   private static readonly configScanMode = "scanMode";
   private static readonly configDisableTelemetry = "disableTelemetry";
@@ -75,8 +76,8 @@ export class Scan {
       return true;
     }
     const isWin: boolean = platform().indexOf("win") > -1;
-    const where: string = isWin ? "where" : "whereis";
-    const ret: SpawnSyncReturns<String> = spawnSync(where, ["scan"]);
+    const where: string = isWin ? "where" : "which";
+    const ret: SpawnSyncReturns<string> = spawnSync(where, ["scan"]);
     if (ret.status === 0 && !ret.error) {
       Scan.scanCliAvailable = true;
     }
@@ -155,7 +156,11 @@ export class Scan {
     const sarifConfig: WorkspaceConfiguration = workspace.getConfiguration(
       Utilities.configSection
     );
-    let containerImage: string = sarifConfig.get(
+    const containerTool: string = sarifConfig.get(
+      Scan.configContainerTool,
+      "docker"
+    );
+    const containerImage: string = sarifConfig.get(
       Scan.configContainerImage,
       "shiftleft/sast-scan"
     );
@@ -219,7 +224,7 @@ export class Scan {
       env["DISABLE_TELEMETRY"] = true;
     }
     let cmdArgs: string[] = [];
-    let baseCmd: string = "docker";
+    let baseCmd: string = containerTool;
     if (Scan.checkLocalCommand()) {
       cmdArgs = ["--src", appRoot, "--mode", scanMode];
       baseCmd = "scan";
@@ -248,7 +253,9 @@ export class Scan {
     } else {
       outputChannel.appendLine(`⚡︎ Security scan has started ...`);
     }
-
+    // DEBUG
+    outputChannel.appendLine(baseCmd);
+    outputChannel.appendLine(cmdArgs.join(" "));
     outputChannel.show(true);
     await Scan.deleteResults(workspaceRoot, appRoot);
     const proc: ChildProcess = spawn(baseCmd, cmdArgs, {
@@ -271,11 +278,13 @@ export class Scan {
         outputChannel.appendLine(data);
       }, 500);
     });
-    proc.on("close", async (code) => {
+    proc.on("close", async (code: number) => {
       Scan.scanInProgress = false;
       if (code !== 0) {
         await window.showErrorMessage(
-          `ShiftLeft scan has failed. Please check if docker desktop is running`,
+          baseCmd === "docker"
+            ? `ShiftLeft scan has failed. Please check if docker desktop is running`
+            : `Unable to scan using podman. Please retry with docker`,
           { modal: false }
         );
       } else {
