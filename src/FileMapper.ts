@@ -284,6 +284,11 @@ export class FileMapper implements Disposable {
       return;
     }
 
+    // Try by changing the extension
+    if (this.tryChangeExtn(uri)) {
+      return;
+    }
+
     if (this.tryConfigRootpathsUri(uri, uriBase)) {
       return;
     }
@@ -653,6 +658,22 @@ export class FileMapper implements Disposable {
       }
     }
 
+    return false;
+  }
+
+  /**
+   * Check if extension can be changed to map to an existing file
+   * @param uri file uri to try to change
+   */
+  private tryChangeExtn(uri: Uri): boolean {
+      const uriText: string = uri.toString(true);
+      if (uriText.endsWith(".js")) {
+        const newpath: string = uriText.replace(".js", ".ts");
+        const mappedUri: Uri = Uri.parse(newpath);
+        if (this.tryMapUri(mappedUri, Utilities.getFsPathWithFragment(uri))) {
+          return true;
+        }
+      }
     return false;
   }
 

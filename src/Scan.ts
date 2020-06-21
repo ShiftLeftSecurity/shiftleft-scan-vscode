@@ -155,7 +155,7 @@ export class Scan {
     const sarifConfig: WorkspaceConfiguration = workspace.getConfiguration(
       Utilities.configSection
     );
-    const containerImage: string = sarifConfig.get(
+    let containerImage: string = sarifConfig.get(
       Scan.configContainerImage,
       "shiftleft/sast-scan"
     );
@@ -211,6 +211,9 @@ export class Scan {
       env["SHIFTLEFT_ORG_ID"] = orgId;
       env["SHIFTLEFT_ORG_TOKEN"] = orgToken;
       env["SHIFTLEFT_ACCESS_TOKEN"] = accessToken;
+      if (containerImage === "shiftleft/sast-scan") {
+        containerImage = "shiftleft/scan-java";
+      }
     }
     if (disableTelemetry) {
       env["DISABLE_TELEMETRY"] = true;
@@ -228,7 +231,7 @@ export class Scan {
         '"WORKSPACE=' + appRoot + '"',
         isInspectEnabled ? inspectArgs.join(" -e ") : "",
         "-v",
-        '"' + appRoot + ':/app:cached"',
+        '"' + appRoot + ':/app"',
         disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
         containerImage,
         "scan",
