@@ -47,8 +47,6 @@ Use this extension to perform security scans locally in your desktop or the clou
 2. Results will show up on the **Scan Findings** panel
 3. Click the result you're investigating. The editor will navigate to the location
 
-**NOTE:** Public API token is not automatically enabled for all users. If you do not see this token, please [contact](https://www.shiftleft.io/contact/) support to get it enabled.
-
 ## Monorepo support
 
 While working with large monorepo based repositories, configure the application root to limit the scanning to specific application directories. To do this, go to Preferences and search for "ShiftLeft". Specify the `App Root` as shown below:
