@@ -45,12 +45,13 @@ export class Scan {
   // Configuration keys
   private static readonly configContainerTool = "containerTool";
   private static readonly configContainerImage = "containerImage";
+  private static readonly configContainerParams = "containerParams";
   private static readonly configScanMode = "scanMode";
   private static readonly configDisableTelemetry = "disableTelemetry";
   private static readonly configAppRoot = "appRoot";
   private static readonly configAppName = "appName";
   private static readonly configOrgId = "orgId";
-  private static readonly configOrgToken = "orgToken";
+  private static readonly configApiToken = "apiToken";
   private static readonly configAccessToken = "accessToken";
 
   public static initialize(extensionContext: vscode.ExtensionContext): void {
@@ -160,10 +161,11 @@ export class Scan {
       Scan.configContainerTool,
       "docker"
     );
-    const containerImage: string = sarifConfig.get(
+    let containerImage: string = sarifConfig.get(
       Scan.configContainerImage,
       "shiftleft/sast-scan"
     );
+    let containerParams: string = sarifConfig.get(Scan.configContainerParams, "");
     const scanMode: string = sarifConfig.get(Scan.configScanMode, "ide");
     const appRootFromConfig: string | undefined = sarifConfig.get(
       Scan.configAppRoot,
@@ -181,8 +183,8 @@ export class Scan {
       Scan.configOrgId,
       undefined
     );
-    const orgToken: string | undefined = sarifConfig.get(
-      Scan.configOrgToken,
+    const apiToken: string | undefined = sarifConfig.get(
+      Scan.configApiToken,
       undefined
     );
     const accessToken: string | undefined = sarifConfig.get(
@@ -203,7 +205,7 @@ export class Scan {
       "",
       appName ? '"SHIFTLEFT_APP=' + appName + '"' : "",
       orgId ? '"SHIFTLEFT_ORG_ID=' + orgId + '"' : "",
-      orgToken ? '"SHIFTLEFT_ORG_TOKEN=' + orgToken + '"' : "",
+      apiToken ? '"SHIFTLEFT_API_TOKEN=' + apiToken + '"' : "",
       accessToken ? '"SHIFTLEFT_ACCESS_TOKEN=' + accessToken + '"' : "",
     ];
 
@@ -211,10 +213,10 @@ export class Scan {
     const env: ExecOptions["env"] = {
       WORKSPACE: appRoot,
     };
-    const isInspectEnabled: boolean = !!orgId && !!orgToken && !!accessToken;
+    const isInspectEnabled: boolean = !!orgId && !!apiToken && !!accessToken;
     if (isInspectEnabled) {
       env["SHIFTLEFT_ORG_ID"] = orgId;
-      env["SHIFTLEFT_ORG_TOKEN"] = orgToken;
+      env["SHIFTLEFT_API_TOKEN"] = apiToken;
       env["SHIFTLEFT_ACCESS_TOKEN"] = accessToken;
       if (containerImage === "shiftleft/sast-scan") {
         containerImage = "shiftleft/scan-java";
@@ -231,6 +233,7 @@ export class Scan {
     } else {
       cmdArgs = [
         "run",
+        containerParams,
         "--rm",
         "-e",
         '"WORKSPACE=' + appRoot + '"',
