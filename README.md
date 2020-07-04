@@ -24,7 +24,7 @@ Use this extension to perform security scans locally in your desktop or the clou
   - Attachments
   - Fixes
 - macOS touch bar support
-- Upgrade to [Inspect](https://www.shiftleft.io/register) to perform cloud-based deep analysis
+- Upgrade to [NG SAST](https://www.shiftleft.io/register) to perform cloud-based deep analysis
 
 ## Results Viewer
 

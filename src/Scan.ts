@@ -194,7 +194,7 @@ export class Scan {
       appNameFromConfig && appNameFromConfig !== ""
         ? appNameFromConfig
         : workspaceName;
-    const inspectArgs: string[] = [
+    const ngSastArgs: string[] = [
       "",
       appName ? '"SHIFTLEFT_APP=' + appName + '"' : "",
       orgId ? '"SHIFTLEFT_ORG_ID=' + orgId + '"' : "",
@@ -206,8 +206,8 @@ export class Scan {
     const env: ExecOptions["env"] = {
       WORKSPACE: appRoot,
     };
-    const isInspectEnabled: boolean = !!orgId && !!orgToken && !!accessToken;
-    if (isInspectEnabled) {
+    const isNgSastEnabled: boolean = !!orgId && !!orgToken && !!accessToken;
+    if (isNgSastEnabled) {
       env["SHIFTLEFT_ORG_ID"] = orgId;
       env["SHIFTLEFT_ORG_TOKEN"] = orgToken;
       env["SHIFTLEFT_ACCESS_TOKEN"] = accessToken;
@@ -229,7 +229,7 @@ export class Scan {
         "--rm",
         "-e",
         '"WORKSPACE=' + appRoot + '"',
-        isInspectEnabled ? inspectArgs.join(" -e ") : "",
+        isNgSastEnabled ? ngSastArgs.join(" -e ") : "",
         "-v",
         '"' + appRoot + ':/app"',
         disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
@@ -241,10 +241,10 @@ export class Scan {
     }
     cmdArgs = cmdArgs.filter((v) => v !== "");
     const outputChannel: OutputChannel = window.createOutputChannel(
-      isInspectEnabled ? "ShiftLeft Inspect" : "ShiftLeft Scan"
+      isNgSastEnabled ? "ShiftLeft NG SAST" : "ShiftLeft Scan"
     );
-    if (isInspectEnabled) {
-      outputChannel.appendLine(`⚡︎ ShiftLeft Inspect scan has started ...`);
+    if (isNgSastEnabled) {
+      outputChannel.appendLine(`⚡︎ ShiftLeft NG SAST scan has started ...`);
     } else {
       outputChannel.appendLine(`⚡︎ Security scan has started ...`);
     }

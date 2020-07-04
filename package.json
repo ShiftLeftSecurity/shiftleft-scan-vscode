@@ -4,7 +4,7 @@
   "description": "ShiftLeft Scan is a free open-source security tool for modern DevOps teams",
   "author": "ShiftLeft Inc",
   "license": "GPL-3.0-or-later",
-  "version": "1.1.1",
+  "version": "1.1.5",
   "publisher": "ShiftLeftSecurity",
   "homepage": "https://shiftleft.io",
   "repository": {
@@ -81,17 +81,17 @@
         "shiftleft-scan.orgId": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft Inspect organization id for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NG SAST organization id for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.orgToken": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft Inspect organization token (aka Public API Token) for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NG SAST organization token (aka Public API Token) for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.accessToken": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft Inspect access token for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NG SAST access token for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.disableTelemetry": {
           "type": "boolean",
