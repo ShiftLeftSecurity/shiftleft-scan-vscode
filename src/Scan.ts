@@ -22,6 +22,7 @@ import {
   spawnSync,
   SpawnSyncReturns,
   ExecOptions,
+  execSync,
 } from "child_process";
 import {
   commands,
@@ -51,9 +52,12 @@ export class Scan {
   private static readonly configOrgId = "orgId";
   private static readonly configOrgToken = "orgToken";
   private static readonly configAccessToken = "accessToken";
+  private static readonly downloadAttemptCount = "scanDownloadAttempts";
+  private static readonly MAX_DOWNLOAD_ATTEMPT = 3;
 
   public static initialize(extensionContext: vscode.ExtensionContext): void {
     Scan.registerCommands(extensionContext);
+    Scan.checkDownload(extensionContext).then((ret: boolean) => {}).catch(() => {});
   }
 
   private static registerCommands(
@@ -70,13 +74,71 @@ export class Scan {
   /**
    * Method to check if local cli is available
    */
+  public static async checkDownload(extensionContext: vscode.ExtensionContext): Promise<boolean> {
+    if (Scan.scanCliAvailable) {
+      return false;
+    }
+    if (Scan.checkLocalCommand()) {
+      return false;
+    }
+    const isLinux: boolean = platform().indexOf("linux") > -1;
+    let downloadAttempts: number | undefined = extensionContext.globalState.get<number>(Scan.downloadAttemptCount);
+    if (downloadAttempts === undefined) {
+      downloadAttempts = 0;
+    }
+    if (downloadAttempts > Scan.MAX_DOWNLOAD_ATTEMPT) {
+      return false;
+    }
+    if (isLinux) {
+      /*
+      const outputChannel: OutputChannel = window.createOutputChannel(
+        "ShiftLeft downloader"
+      );
+      */
+      const baseCmd: string = "curl https://slscan.sh/install | bash";
+      execSync(baseCmd, {
+        shell: "bash",
+        encoding: "utf8"
+      });
+      await extensionContext.globalState.update(Scan.downloadAttemptCount, ++downloadAttempts);
+      /*
+      outputChannel.show(true);
+      proc.stdout.on("data", async (data: string) => {
+        setTimeout(async () => {
+          outputChannel.appendLine(data);
+        }, 500);
+      });
+      proc.stderr.on("data", async (data: string) => {
+        setTimeout(async () => {
+          outputChannel.appendLine(data);
+        }, 500);
+      });
+      proc.on("close", async (code) => {
+        if (code !== 0) {
+          await window.showErrorMessage(`Download has failed ${code}`);
+          return false;
+        } else {
+          outputChannel.hide();
+          return true;
+        }
+      });
+      */
+      return false;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Method to check if local cli is available
+   */
   public static checkLocalCommand(): boolean {
     if (Scan.scanCliAvailable) {
       return true;
     }
     const isWin: boolean = platform().indexOf("win") > -1;
-    const where: string = isWin ? "where" : "whereis";
-    const ret: SpawnSyncReturns<String> = spawnSync(where, ["scan"]);
+    const where: string = isWin ? "where" : "which";
+    const ret: SpawnSyncReturns<string> = spawnSync(where, ["scan"]);
     if (ret.status === 0 && !ret.error) {
       Scan.scanCliAvailable = true;
     }
