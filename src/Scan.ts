@@ -57,7 +57,6 @@ export class Scan {
 
   public static initialize(extensionContext: vscode.ExtensionContext): void {
     Scan.registerCommands(extensionContext);
-    Scan.checkDownload(extensionContext).then((ret: boolean) => {}).catch(() => {});
   }
 
   private static registerCommands(
@@ -308,7 +307,7 @@ export class Scan {
     if (isNgSastEnabled) {
       outputChannel.appendLine(`⚡︎ ShiftLeft NG SAST scan has started ...`);
     } else {
-      outputChannel.appendLine(`⚡︎ Security scan has started ...`);
+      outputChannel.appendLine(`⚡︎ Security scan has started ${baseCmd} ${cmdArgs.join(" ")} ...`);
     }
 
     outputChannel.show(true);
@@ -316,6 +315,8 @@ export class Scan {
     const proc: ChildProcess = spawn(baseCmd, cmdArgs, {
       shell: true,
       env: env,
+      cwd: appRoot,
+      detached: false
     });
     proc.stdout.on("data", async (data: string) => {
       setTimeout(async () => {
