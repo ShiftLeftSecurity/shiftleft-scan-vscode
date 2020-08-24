@@ -144,7 +144,7 @@ export class Scan {
   }
 
   /**
-   * Perform ShiftLeft Scan
+   * Perform Scan
    */
   public static async performSastScan(): Promise<void> {
     if (Scan.scanInProgress) {
@@ -241,10 +241,10 @@ export class Scan {
     }
     cmdArgs = cmdArgs.filter((v) => v !== "");
     const outputChannel: OutputChannel = window.createOutputChannel(
-      isInspectEnabled ? "ShiftLeft Inspect" : "ShiftLeft Scan"
+      isInspectEnabled ? "ShiftLeft NextGen" : "Scan"
     );
     if (isInspectEnabled) {
-      outputChannel.appendLine(`⚡︎ ShiftLeft Inspect scan has started ...`);
+      outputChannel.appendLine(`⚡︎ ShiftLeft NextGen scan has started ...`);
     } else {
       outputChannel.appendLine(`⚡︎ Security scan has started ...`);
     }
@@ -275,7 +275,7 @@ export class Scan {
       Scan.scanInProgress = false;
       if (code !== 0) {
         await window.showErrorMessage(
-          `ShiftLeft scan has failed. Please check if docker desktop is running`,
+          `Security scan has failed. Please check if docker desktop is running`,
           { modal: false }
         );
       } else {

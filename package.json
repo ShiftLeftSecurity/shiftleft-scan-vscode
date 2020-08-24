@@ -1,10 +1,10 @@
 {
-  "name": "shiftleft-scan",
-  "displayName": "ShiftLeft Scan",
-  "description": "ShiftLeft Scan is a free open-source security tool for modern DevOps teams",
+  "name": "slscan",
+  "displayName": "Security Scan",
+  "description": "Scan is a free security audit tool for modern DevOps teams",
   "author": "ShiftLeft Inc",
   "license": "GPL-3.0-or-later",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "publisher": "ShiftLeftSecurity",
   "homepage": "https://shiftleft.io",
   "repository": {
@@ -24,7 +24,7 @@
   ],
   "keywords": [
     "sarif",
-    "shiftleft scan",
+    "Security scan",
     "SAST scan",
     "Dependency scan",
     "License scan"
@@ -55,7 +55,7 @@
       ]
     },
     "configuration": {
-      "title": "ShiftLeft Scan",
+      "title": "Security Scan",
       "properties": {
         "shiftleft-scan.containerImage": {
           "type": "string",
@@ -71,7 +71,7 @@
         "shiftleft-scan.appName": {
           "type": "string",
           "default": "",
-          "description": "Application name. Override while performing ShiftLeft Insepct cloud based scans."
+          "description": "Application name. Override while performing ShiftLeft NextGen cloud based scans."
         },
         "shiftleft-scan.appRoot": {
           "type": "string",
@@ -81,17 +81,17 @@
         "shiftleft-scan.orgId": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft Inspect organization id for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NextGen organization id for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.orgToken": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft Inspect organization token (aka Public API Token) for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NextGen organization token (aka Public API Token) for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.accessToken": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft Inspect access token for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NextGen access token for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.disableTelemetry": {
           "type": "boolean",
