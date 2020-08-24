@@ -9,7 +9,7 @@
 ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
 ```
 
-ShiftLeft [Scan](https://docs.shiftleft.io/shiftleft/scan/scan) is a free and open-source security tool for modern DevOps teams. With an integrated multi-scanner based design, Scan can detect various kinds of security flaws in your application and infrastructure code in a single fast scan without the need for any remote server! The product supports a range of integration options: from scanning every push via a git hook to scanning every build and pull-request in the CI/CD pipelines such as Azure DevOps Pipelines, GitHub actions and so on. Scan products are open-source under a GNU GPL 3.0 or later (GPL-3.0-or-later) license.
+[Scan](https://slscan.io) is a free and open-source security audit tool for modern DevOps teams. With an integrated multi-scanner based design, Scan can detect various kinds of security flaws in your application and infrastructure code in a single fast scan without the need for any remote server! The product supports a range of integration options: from scanning every push via a git hook to scanning every build and pull-request in the CI/CD pipelines such as Azure DevOps Pipelines, GitHub actions and so on. Scan products are open-source under a GNU GPL 3.0 or later (GPL-3.0-or-later) license.
 
 Use this extension to perform security scans locally in your desktop or the cloud workspace and visualize the scan results without leaving your IDE. Navigate to the source code and remediate the results by interacting with the scan results.
 
@@ -37,13 +37,13 @@ Use this extension to perform security scans locally in your desktop or the clou
 ## Install
 
 1. Install or upgrade [Visual Studio Code](https://code.visualstudio.com/). Requires version 1.41.0 or higher.
-2. Install the ShiftLeft Scan Extension
+2. Install the Scan Extension
 3. Reload VS Code
-4. Install Docker Desktop for performing ShiftLeft Scan. Upon first scan, a container image called `shiftleft/scan` will get downloaded which performs the scans locally.
+4. Install Docker Desktop for performing Security Scan. Upon first scan, a container image called `shiftleft/scan` will get downloaded which performs the scans locally.
 
 ## Use
 
-1. Perform a ShiftLeft Scan by using the `Perform Security Scan` option in the results window. Or in the Command Palette (Ctrl+Shift+p or ⌘+⇧+p) type "ShiftLeft: Security Scan" or use the hotkey (Ctrl+l then Ctrl+p)
+1. Perform a Security Scan by using the `Perform Security Scan` option in the results window. Or in the Command Palette (Ctrl+Shift+p or ⌘+⇧+p) type "ShiftLeft: Security Scan" or use the hotkey (Ctrl+l then Ctrl+p)
 2. Results will show up on the **Scan Findings** panel
 3. Click the result you're investigating. The editor will navigate to the location
 
@@ -61,7 +61,7 @@ While working with large monorepo based repositories, configure the application 
 
 # Support
 
-For help and support installing and using this extension, please use: https://discuss.shiftleft.io
+Developers behind scan are available on a dedicated [discord channel](https://discord.gg/gC62PzS) for questions and support. For defects, raising an issue on [GitHub](https://github.com/ShiftLeftSecurity/sast-scan/issues) is best.
 
 ## Known Issues
 
@@ -81,4 +81,4 @@ Unable to load schema from 'https://raw.githubusercontent.com/oasis-tcs/sarif-sp
 
 # Credits
 
-The extension uses parts of [SARIF extension](https://github.com/Microsoft/sarif-vscode-extension) with a number of ShiftLeft Scan specific enhancements.
+The extension uses parts of [SARIF extension](https://github.com/Microsoft/sarif-vscode-extension) with a number of Scan specific enhancements.

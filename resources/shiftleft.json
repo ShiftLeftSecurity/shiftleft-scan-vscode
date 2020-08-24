@@ -1,6 +1,6 @@
 {
 	"$schema": "vscode://schemas/color-theme",
-	"name": "ShiftLeft",
+	"name": "skæn",
 	"type": "dark",
 	"colors": {
 	  "notificationCenter.border": "#282828",

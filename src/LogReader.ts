@@ -155,7 +155,7 @@ export class LogReader implements Disposable {
             docMapping = jsonMap.parse(doc.getText());
           } catch (error) {
             await window.showErrorMessage(
-              `ShiftLeft Scan: Cannot display results for '${doc.fileName}' because: ${error.message}`
+              `Scan: Cannot display results for '${doc.fileName}' because: ${error.message}`
             );
             return;
           }
@@ -164,7 +164,7 @@ export class LogReader implements Disposable {
           const log: sarif.Log = docMapping.data;
 
           if (!log.$schema) {
-            await window.showErrorMessage(`ShiftLeft Scan:
+            await window.showErrorMessage(`Scan:
                         Cannot display results for '${doc.fileName}' because the schema was not defined.`);
             return;
           }

@@ -2,7 +2,7 @@
     "name": "sariftypesgenerator",
     "displayName": "Sarif Types Generator",
     "description": "Generates the sarif types definition file from the sarif schema json file",
-    "author": "ShiftLeft Inc",
+    "author": "Team Scan",
     "license": "MIT",
     "version": "1.0.0",
     "repository": {
