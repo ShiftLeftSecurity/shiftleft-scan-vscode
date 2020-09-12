@@ -4,7 +4,7 @@
   "description": "Scan is a free security audit tool for modern DevOps teams",
   "author": "ShiftLeft Inc",
   "license": "GPL-3.0-or-later",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "ShiftLeftSecurity",
   "homepage": "https://shiftleft.io",
   "repository": {
@@ -12,7 +12,7 @@
     "url": "https://github.com/ShiftLeftSecurity/shiftleft-scan-vscode.git"
   },
   "bugs": {
-    "url": "https://discuss.shiftleft.io"
+    "url": "https://github.com/ShiftLeftSecurity/shiftleft-scan-vscode/issues"
   },
   "icon": "icon.png",
   "galleryBanner": {
@@ -62,10 +62,10 @@
           "default": "shiftleft/scan:latest",
           "description": "Scan container image to use. Leave as default.",
           "enum": [
-            "shiftleft/scan:latest",
-            "shiftleft/scan-java:latest",
-            "shiftleft/scan-csharp:latest",
-            "shiftleft/scan-oss:latest"
+            "docker.io/shiftleft/scan:latest",
+            "docker.io/shiftleft/scan-java:latest",
+            "docker.io/shiftleft/scan-csharp:latest",
+            "docker.io/shiftleft/scan-oss:latest"
           ]
         },
         "shiftleft-scan.appName": {
@@ -83,10 +83,10 @@
           "default": "",
           "description": "ShiftLeft NextGen organization id for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
-        "shiftleft-scan.orgToken": {
+        "shiftleft-scan.apiToken": {
           "type": "string",
           "default": "",
-          "description": "ShiftLeft NextGen organization token (aka Public API Token) for cloud based scans. Visit https://www.shiftleft.io/register to signup."
+          "description": "ShiftLeft NextGen public API Token for cloud based scans. Visit https://www.shiftleft.io/register to signup."
         },
         "shiftleft-scan.accessToken": {
           "type": "string",

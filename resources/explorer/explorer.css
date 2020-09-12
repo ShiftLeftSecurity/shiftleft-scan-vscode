@@ -41,6 +41,16 @@ header.navbar .navbar-section {
   padding: 10px;
 }
 
+header.navbar .navbar-logo {
+  width: 40px;
+  height: auto;
+  padding-right: 10px;
+}
+
+header.navbar .navbar-brand {
+  vertical-align: middle;
+}
+
 .headercontainer {
   padding: 10px;
   font-size: 16px;
