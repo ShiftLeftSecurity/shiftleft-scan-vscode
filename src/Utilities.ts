@@ -377,7 +377,7 @@ export class Utilities {
   public static fixUriCasing(uri: vscode.Uri): vscode.Uri {
     // We can only support file-system scheme files.
     // Use "root" locale to indicate invariant language.
-    if (uri.scheme.toLocaleUpperCase("root") !== "FILE") {
+    if (uri.scheme.toLocaleUpperCase() !== "FILE") {
       return uri;
     }
 
@@ -604,9 +604,7 @@ export class Utilities {
   public static isSarifFile(doc: vscode.TextDocument | string): boolean {
     // SARIF spec says that the file name can end in ".sarif" or ".sarif.json";
     const stringCheck: (stringToCheck: string) => boolean = (stringToCheck) => {
-      const stringCheckUpperCase: string = stringToCheck.toLocaleUpperCase(
-        "root"
-      );
+      const stringCheckUpperCase: string = stringToCheck.toLocaleUpperCase();
       return (
         stringCheckUpperCase.endsWith(".SARIF") ||
         stringCheckUpperCase.endsWith(".SARIF.JSON")

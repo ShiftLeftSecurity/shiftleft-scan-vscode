@@ -49,8 +49,10 @@ export class Scan {
   private static readonly configAppRoot = "appRoot";
   private static readonly configAppName = "appName";
   private static readonly configOrgId = "orgId";
-  private static readonly configOrgToken = "orgToken";
+  private static readonly configApiToken = "apiToken";
   private static readonly configAccessToken = "accessToken";
+  private static readonly isWin: boolean = platform().indexOf("win32") > -1;
+  private static readonly isMac: boolean = platform().indexOf("darwin") > -1;
 
   public static initialize(extensionContext: vscode.ExtensionContext): void {
     Scan.registerCommands(extensionContext);
@@ -74,8 +76,7 @@ export class Scan {
     if (Scan.scanCliAvailable) {
       return true;
     }
-    const isWin: boolean = platform().indexOf("win") > -1;
-    const where: string = isWin ? "where" : "whereis";
+    const where: string = Scan.isWin ? "where" : "which";
     const ret: SpawnSyncReturns<String> = spawnSync(where, ["scan"]);
     if (ret.status === 0 && !ret.error) {
       Scan.scanCliAvailable = true;
@@ -157,7 +158,7 @@ export class Scan {
     );
     let containerImage: string = sarifConfig.get(
       Scan.configContainerImage,
-      "shiftleft/sast-scan"
+      "docker.io/shiftleft/sast-scan:latest"
     );
     const scanMode: string = sarifConfig.get(Scan.configScanMode, "ide");
     const appRootFromConfig: string | undefined = sarifConfig.get(
@@ -176,8 +177,8 @@ export class Scan {
       Scan.configOrgId,
       undefined
     );
-    const orgToken: string | undefined = sarifConfig.get(
-      Scan.configOrgToken,
+    const apiToken: string | undefined = sarifConfig.get(
+      Scan.configApiToken,
       undefined
     );
     const accessToken: string | undefined = sarifConfig.get(
@@ -198,18 +199,20 @@ export class Scan {
       "",
       appName ? '"SHIFTLEFT_APP=' + appName + '"' : "",
       orgId ? '"SHIFTLEFT_ORG_ID=' + orgId + '"' : "",
-      orgToken ? '"SHIFTLEFT_ORG_TOKEN=' + orgToken + '"' : "",
+      apiToken ? '"SHIFTLEFT_API_TOKEN=' + apiToken + '"' : "",
       accessToken ? '"SHIFTLEFT_ACCESS_TOKEN=' + accessToken + '"' : "",
     ];
-
+    const shell: string | boolean = Scan.isMac
+      ? process.env["SHELL"] || "/bin/bash"
+      : true;
     // Process environment variables
     const env: ExecOptions["env"] = {
       WORKSPACE: appRoot,
     };
-    const isInspectEnabled: boolean = !!orgId && !!orgToken && !!accessToken;
+    const isInspectEnabled: boolean = !!orgId && !!apiToken && !!accessToken;
     if (isInspectEnabled) {
       env["SHIFTLEFT_ORG_ID"] = orgId;
-      env["SHIFTLEFT_ORG_TOKEN"] = orgToken;
+      env["SHIFTLEFT_API_TOKEN"] = apiToken;
       env["SHIFTLEFT_ACCESS_TOKEN"] = accessToken;
       if (containerImage === "shiftleft/sast-scan") {
         containerImage = "shiftleft/scan-java";
@@ -219,7 +222,9 @@ export class Scan {
       env["DISABLE_TELEMETRY"] = true;
     }
     let cmdArgs: string[] = [];
-    let baseCmd: string = "docker";
+    let baseCmd: string = Scan.isMac
+      ? "/Applications/Docker.app/Contents/Resources/bin/docker"
+      : "docker";
     if (Scan.checkLocalCommand()) {
       cmdArgs = ["--src", appRoot, "--mode", scanMode];
       baseCmd = "scan";
@@ -248,11 +253,11 @@ export class Scan {
     } else {
       outputChannel.appendLine(`⚡︎ Security scan has started ...`);
     }
-
+    outputChannel.appendLine(`${shell} ${baseCmd} ${cmdArgs.join(" ")}`);
     outputChannel.show(true);
     await Scan.deleteResults(workspaceRoot, appRoot);
     const proc: ChildProcess = spawn(baseCmd, cmdArgs, {
-      shell: true,
+      shell,
       env: env,
     });
     proc.stdout.on("data", async (data: string) => {

@@ -324,13 +324,10 @@ export class ExplorerController implements Disposable {
       ...resourcesPath,
       "jquery-3.3.1.min.js"
     );
-
-    /*
-    const animatedGifPath: Uri = this.getVSCodeResourcePath(
+    const scanDarkLogoPath: Uri = this.getVSCodeResourcePath(
       ...resourcesPath,
-      "giphy.gif"
+      "scan-dark.png"
     );
-    */
 
     const colResizeDiskPath: Uri = this.getVSCodeResourcePath(
       ...resourcesPath,
@@ -369,7 +366,8 @@ export class ExplorerController implements Disposable {
             <div class="container grid-xl">
             <header class="navbar" style="height: 4rem;">
               <section class="navbar-section">
-                <a href="https://slscan.io" class="navbar-brand">Scan (skæn)</a>
+                <img src="${scanDarkLogoPath}" class="navbar-logo" />
+                <a href="https://slscan.io" class="navbar-brand"> Security Scan</a>
               </section>
             </header>
             <div id="emptyResults" class="${resultsClass}">
@@ -387,7 +385,7 @@ export class ExplorerController implements Disposable {
                   <p>The findings would appear here shortly ...</p>
                 </div>
                 <div class="card-footer">
-                    <a id="shiftleft-scan-docs" href="https://docs.shiftleft.io/shiftleft/scan/scan">Learn more about Scan</a>
+                    <a id="shiftleft-scan-docs" href="https://slscan.io">Learn more about Scan</a>
                 </div>
                 </div>
               </div></div>
