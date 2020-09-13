@@ -3,6 +3,16 @@
 // *   Copyright (C) ShiftLeft Inc. All rights reserved.       *
 // *                                                       *
 // ********************************************************/
+:root {
+  --layer0: hsla(15, 94%, 7%, 1);
+  --layer1: hsla(10, 85%, 21%, 1);
+  --layer2: hsla(7, 85%, 31%, 1);
+  --layer3: hsla(16, 92%, 38%, 1);
+  --layer4: hsla(39, 92%, 54%, 1);
+  --layer5: hsla(39, 92%, 54%, 1);
+  --btn-background: hsla(15, 94%, 7%, 1);
+  --btn-focus-background: hsla(16, 92%, 38%, 1);
+}
 
 .listtable {
   border-spacing: 0px !important;
@@ -34,13 +44,14 @@
   font-size: 12px;
 }
 tr.listtablerow:hover {
-  background-color: #3ecf8e;
+  background-color: var(--layer4);
 }
 
 tr.listtablerow.selected {
-  background-color: #5725e1;
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
 }
 
 tr.listtablerow.selected:focus {
-  background-color: #3ecf8e;
+  background-color: var(--layer4);
 }

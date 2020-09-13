@@ -36,7 +36,8 @@
     "onLanguage:json",
     "onCommand:extension.shiftleft.LaunchExplorer",
     "onCommand:extension.shiftleft.PerformScan",
-    "workspaceContains:**/*.sarif"
+    "workspaceContains:**/*.sarif",
+    "workspaceContains:.sastscanrc"
   ],
   "main": "./out/extension",
   "contributes": {
