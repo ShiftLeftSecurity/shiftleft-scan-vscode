@@ -324,7 +324,7 @@ export class ExplorerController implements Disposable {
       ...resourcesPath,
       "jquery-3.3.1.min.js"
     );
-    const scanDarkLogoPath: Uri = this.getVSCodeResourcePath(
+    const scanLogoPath: Uri = this.getVSCodeResourcePath(
       ...resourcesPath,
       "scan-dark.png"
     );
@@ -366,7 +366,7 @@ export class ExplorerController implements Disposable {
             <div class="container grid-xl">
             <header class="navbar" style="height: 4rem;">
               <section class="navbar-section">
-                <img src="${scanDarkLogoPath}" class="navbar-logo" />
+                <img src="${scanLogoPath}" class="navbar-logo" />
                 <a href="https://slscan.io" class="navbar-brand"> Security Scan</a>
               </section>
             </header>
@@ -378,15 +378,9 @@ export class ExplorerController implements Disposable {
                   <div class="empty-action">
                     <button class="btn btn-primary" id="scanBtn">Perform Security Scan</button>
                   </div>
-                </div>
-              </div></div>
-              <div class="columns col-gapless d-hide"><div class="column col-12">
-                <div class="card"><div class="card-header"><h4>Just started your scan?</h4></div><div class="card-body">
-                  <p>The findings would appear here shortly ...</p>
-                </div>
-                <div class="card-footer">
-                    <a id="shiftleft-scan-docs" href="https://slscan.io">Learn more about Scan</a>
-                </div>
+                  <div class="card-footer">
+                    <a id="shiftleft-scan-docs" href="https://slscan.io">Scan docs</a>
+                  </div>
                 </div>
               </div></div>
             </div>

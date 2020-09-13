@@ -3,6 +3,16 @@
 // *   Copyright (C) ShiftLeft Inc. All rights reserved.       *
 // *                                                       *
 // ********************************************************/
+:root {
+  --layer0: hsla(15, 94%, 7%, 1);
+  --layer1: hsla(10, 85%, 21%, 1);
+  --layer2: hsla(7, 85%, 31%, 1);
+  --layer3: hsla(16, 92%, 38%, 1);
+  --layer4: hsla(39, 92%, 54%, 1);
+  --layer5: hsla(39, 92%, 54%, 1);
+  --btn-background: hsla(15, 94%, 7%, 1);
+  --btn-focus-background: hsla(16, 92%, 38%, 1);
+}
 
 #resultslistheader[class~="collapsed"] + #resultslistcontainer {
     display: none;
@@ -46,17 +56,17 @@ tr {
 }
 
 select#resultslistgroupby {
-    background-color: #5725e1;
+    background-color: var(--layer3);
     border-style: none;
     color: #ffffff;
 }
 
 select#resultslistgroupby:focus {
-    outline-color: #3ecf8e;
+    outline-color: var(--layer0);
 }
 
 option {
-    background-color: #5725e1;
+    background-color: var(--layer3);
     color: #ffffff;
 }
 
@@ -174,9 +184,11 @@ button#filterinputcasebutton:before {
 }
 
 .countbadge {
-    background-color: #5725e1;
+    color: var(--layer0);
     border-radius: 1em;
-    color: #ffffff;
+    border-color: var(--layer0);
+    border: 1px solid;
+    background-color: #ffffff;
     display: inline-block;
     font-size: 85%;
     font-weight: 400;
