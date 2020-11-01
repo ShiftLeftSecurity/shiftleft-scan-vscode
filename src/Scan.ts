@@ -255,7 +255,6 @@ export class Scan {
     }
     outputChannel.appendLine(`${shell} ${baseCmd} ${cmdArgs.join(" ")}`);
     outputChannel.show(true);
-    await Scan.deleteResults(workspaceRoot, appRoot);
     const proc: ChildProcess = spawn(baseCmd, cmdArgs, {
       shell,
       env: env,
