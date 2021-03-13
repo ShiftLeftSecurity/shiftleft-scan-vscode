@@ -9,7 +9,7 @@
 ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
 ```
 
-[Scan](https://slscan.io) is a free and open-source security audit tool for modern DevOps teams. With an integrated multi-scanner based design, Scan can detect various kinds of security flaws in your application and infrastructure code in a single fast scan without the need for any remote server! The product supports a range of integration options: from scanning every push via a git hook to scanning every build and pull-request in the CI/CD pipelines such as Azure DevOps Pipelines, GitHub actions and so on. Scan products are open-source under a GNU GPL 3.0 or later (GPL-3.0-or-later) license.
+[Security and License Scan](https://slscan.io) is a free and open-source security audit tool for modern DevOps teams. With an integrated multi-scanner based design, Scan can detect various kinds of security flaws in your application and infrastructure code in a single fast scan without the need for any remote server! The product supports a range of integration options: from scanning every push via a git hook to scanning every build and pull-request in the CI/CD pipelines such as Azure DevOps Pipelines, GitHub actions and so on. Scan products are open-source under a GNU GPL 3.0 or later (GPL-3.0-or-later) license.
 
 Use this extension to perform security scans locally in your desktop or the cloud workspace and visualize the scan results without leaving your IDE. Navigate to the source code and remediate the results by interacting with the scan results.
 
@@ -24,7 +24,6 @@ Use this extension to perform security scans locally in your desktop or the clou
   - Attachments
   - Fixes
 - macOS touch bar support
-- Upgrade to [Inspect](https://www.shiftleft.io/register) to perform cloud-based deep analysis
 
 ## Results Viewer
 
@@ -61,7 +60,7 @@ While working with large monorepo based repositories, configure the application 
 
 # Support
 
-Developers behind scan are available on a dedicated [discord channel](https://discord.gg/gC62PzS) for questions and support. For defects, raising an issue on [GitHub](https://github.com/ShiftLeftSecurity/sast-scan/issues) is best.
+Developers behind scan are available on a dedicated [discord channel](https://discord.gg/7WvSxdK) for questions and support. For defects, raising an issue on [GitHub](https://github.com/ShiftLeftSecurity/sast-scan/issues) is best.
 
 ## Known Issues
 

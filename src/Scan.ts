@@ -45,7 +45,6 @@ export class Scan {
   // Configuration keys
   private static readonly configContainerImage = "containerImage";
   private static readonly configScanMode = "scanMode";
-  private static readonly configDisableTelemetry = "disableTelemetry";
   private static readonly configAppRoot = "appRoot";
   private static readonly configAppName = "appName";
   private static readonly configOrgId = "orgId";
@@ -77,7 +76,7 @@ export class Scan {
       return true;
     }
     const where: string = Scan.isWin ? "where" : "which";
-    const ret: SpawnSyncReturns<String> = spawnSync(where, ["scan"]);
+    const ret: SpawnSyncReturns<String> = spawnSync(where, ["slscan"]);
     if (ret.status === 0 && !ret.error) {
       Scan.scanCliAvailable = true;
     }
@@ -169,10 +168,6 @@ export class Scan {
       Scan.configAppName,
       undefined
     );
-    const disableTelemetry: boolean = sarifConfig.get(
-      Scan.configDisableTelemetry,
-      false
-    );
     const orgId: string | undefined = sarifConfig.get(
       Scan.configOrgId,
       undefined
@@ -218,9 +213,6 @@ export class Scan {
         containerImage = "shiftleft/scan-java";
       }
     }
-    if (disableTelemetry) {
-      env["DISABLE_TELEMETRY"] = true;
-    }
     let cmdArgs: string[] = [];
     let baseCmd: string = Scan.isMac
       ? "/Applications/Docker.app/Contents/Resources/bin/docker"
@@ -237,7 +229,6 @@ export class Scan {
         isInspectEnabled ? inspectArgs.join(" -e ") : "",
         "-v",
         '"' + appRoot + ':/app"',
-        disableTelemetry ? "-e DISABLE_TELEMETRY=true" : "",
         containerImage,
         "scan",
         "--mode",
