@@ -270,7 +270,7 @@
   },
   "dependencies": {
     "json-source-map": "^0.4.0",
-    "jsonpointer": "4.0.1",
+    "jsonpointer": "5.0.0",
     "markdown-it": "^9.0.1",
     "systemjs": "^6.2.6",
     "requirejs": "^2.3.6"
